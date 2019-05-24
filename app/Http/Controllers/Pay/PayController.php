@@ -30,8 +30,8 @@ class PayController extends Controller
         $this->gate_way = 'https://openapi.alipaydev.com/gateway.do';
         $this->notify_url = env('ALIPAY_NOTIFY_URL');
         $this->return_url = 'http://1809a.team.com/aliReturn';
-        $this->rsaPrivateKeyFilePath = storage_path('app/pay/private.pem');    //应用私钥
-        $this->aliPubKey = storage_path('app/pay/public.pem'); //支付宝公钥
+        $this->rsaPrivateKeyFilePath = storage_path('app/pay/private.key');    //应用私钥
+        $this->aliPubKey = storage_path('app/pay/public.key'); //支付宝公钥
     }
     public function test()
     {
@@ -54,8 +54,8 @@ class PayController extends Controller
         }
         //业务参数
         $bizcont = [
-            'subject'           => 'Lening-Order: ' .$order_id,
-            'out_trade_no'      => $order_id,
+            'subject'           => 'Lening-Order: ' .$order_id, //order_id
+            'out_trade_no'      => $order_info->order_number,        //订单号
             'total_amount'      => $order_info->order_amount,
             'product_code'      => 'QUICK_WAP_WAY',
         ];

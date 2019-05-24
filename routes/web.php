@@ -16,17 +16,18 @@ Route::get('/', function () {
 });
 
 
+//支付
 Route::get('payIndex','Pay\PayController@index');
 Route::get('pay','Pay\PayController@pay');
+Route::post('notify','Pay\PayController@notify');
+Route::get('aliReturn','Pay\PayController@aliReturn');
 
 //收货地址
 Route::get('addressIndex','Address\AddressController@index');
 Route::post('addressDo','Address\AddressController@addressDo');
 
-//
-Route::get('orderDo','Order\OrderController@orderDo');
-
-
+//订单
+Route::any('orderIndex','Order\OrderController@orderDo');
 
 Route::get('product/productList','Product\ProductController@productList');   //商品展示
 Route::post('product/products','Product\ProductController@products');        //流加载

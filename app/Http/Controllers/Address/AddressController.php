@@ -25,8 +25,8 @@ class AddressController extends Controller
 
         $data=[
             'user_id'=>$user_id,
-            'site_name'=>$site_name,
-            'site_tel'=>$site_tel,
+            'user_name'=>$site_name,
+            'user_tel'=>$site_tel,
             'province'=>$province,
             'city'=>$city,
             'detailed'=>$detailed,
