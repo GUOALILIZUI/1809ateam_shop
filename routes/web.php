@@ -15,6 +15,17 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('index', 'Index\IndexController@index');  //首页展示
+
+Route::get('reg', 'Login\RegController@reg');  //注册展示
+
+Route::post('register', 'Login\RegController@register');  //注册执行
+
+Route::get('log', 'Login\LogController@log');  //登录展示
+
+Route::post('login', 'Login\LogController@login');  //登录执行
+
+
 
 Route::get('payIndex','Pay\PayController@index');
 Route::get('pay','Pay\PayController@pay');
