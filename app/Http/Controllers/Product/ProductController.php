@@ -13,9 +13,6 @@ class ProductController extends Controller
      * 商品展示
      */
     public function productList(){
-        //商品数据
-//        $data = Product::where('goods_up',1)->get();
-
         return view('product.productList');
     }
 
