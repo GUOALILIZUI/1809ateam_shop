@@ -17,6 +17,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
 Route::get('index', 'Index\IndexController@index');  //首页展示
 
 Route::get('reg', 'Login\RegController@reg');  //注册展示
@@ -42,4 +43,5 @@ Route::get('pay','Pay\PayController@pay');
 //收货地址
 Route::get('AddressIndex','Address\AddressController@index');
 Route::post('addressDo','Address\AddressController@addressDo');
+
 
