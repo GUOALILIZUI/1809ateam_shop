@@ -31,6 +31,6 @@ Route::get('payIndex','Pay\PayController@index');
 Route::get('pay','Pay\PayController@pay');
 
 
-Route:get('AddressIndex','Address\AddressController@index');
-Route:post('addressDo','Address\AddressController@addressDo');
+Route::get('AddressIndex','Address\AddressController@index');
+Route::post('addressDo','Address\AddressController@addressDo');
 
