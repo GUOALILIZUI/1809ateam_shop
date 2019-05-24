@@ -22,5 +22,6 @@ class VerifyCsrfToken extends Middleware
         'product/products',
         'product/wish',
         'wish/wishDel',
+        'addressDo',
     ];
 }

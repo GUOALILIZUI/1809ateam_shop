@@ -39,6 +39,7 @@ Route::get('payIndex','Pay\PayController@index');
 Route::get('pay','Pay\PayController@pay');
 
 
-Route:get('AddressIndex','Address\AddressController@index');
-Route:post('addressDo','Address\AddressController@addressDo');
+//收货地址
+Route::get('AddressIndex','Address\AddressController@index');
+Route::post('addressDo','Address\AddressController@addressDo');
 
