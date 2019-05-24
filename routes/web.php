@@ -11,6 +11,15 @@
 |
 */
 
+Route::get('/', function () {
+    return view('welcome');
+});
 
 
+Route::get('payIndex','Pay\PayController@index');
+Route::get('pay','Pay\PayController@pay');
+
+
+Route:get('AddressIndex','Address\AddressController@index');
+Route:post('addressDo','Address\AddressController@addressDo');
 
