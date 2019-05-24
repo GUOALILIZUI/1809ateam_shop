@@ -87,7 +87,7 @@
 			<div class="container">
 				<div class="row">
 					<div class="col s4">
-						<a href="index.html" class="button-link">
+						<a href="index" class="button-link">
 							<div class="menu-link">
 								<div class="icon">
 									<i class="fa fa-home"></i>
@@ -97,7 +97,7 @@
 						</a>
 					</div>
 					<div class="col s4">
-						<a href="product-list.html" class="button-link">
+						<a href="product/productList" class="button-link">
 							<div class="menu-link">
 								<div class="icon">
 									<i class="fa fa-bars"></i>
@@ -107,7 +107,7 @@
 						</a>
 					</div>
 					<div class="col s4">
-						<a href="shop-single.html" class="button-link">
+						<a href="product/shopSingle" class="button-link">
 							<div class="menu-link">
 								<div class="icon">
 									<i class="fa fa-eye"></i>
@@ -119,7 +119,7 @@
 				</div>
 				<div class="row">
 					<div class="col s4">
-						<a href="wishlist.html" class="button-link">
+						<a href="wish/wishList" class="button-link">
 							<div class="menu-link">
 								<div class="icon">
 									<i class="fa fa-heart"></i>
@@ -151,7 +151,7 @@
 				</div>
 				<div class="row">
 					<div class="col s4">
-						<a href="blog.html" class="button-link">	
+						<a href="blog.html" class="button-link">
 							<div class="menu-link">
 								<div class="icon">
 									<i class="fa fa-bold"></i>
@@ -161,7 +161,7 @@
 						</a>
 					</div>
 					<div class="col s4">
-						<a href="blog-single.html" class="button-link">	
+						<a href="blog-single.html" class="button-link">
 							<div class="menu-link">
 								<div class="icon">
 									<i class="fa fa-file-text-o"></i>
@@ -225,7 +225,7 @@
 						</a>
 					</div>
 					<div class="col s4">
-						<a href="login.html" class="button-link">
+						<a href="log" class="button-link">
 							<div class="menu-link">
 								<div class="icon">
 									<i class="fa fa-sign-in"></i>
@@ -235,7 +235,7 @@
 						</a>
 					</div>
 					<div class="col s4">
-						<a href="register.html" class="button-link">
+						<a href="reg" class="button-link">
 							<div class="menu-link">
 								<div class="icon">
 									<i class="fa fa-user-plus"></i>
@@ -378,7 +378,7 @@
 						<div class="input-field">
 							<input type="password" class="validate" user="user_pass" id="user_pass" placeholder="PASSWORD" required>
 						</div>
-						<a href="http://vm.1809ateam_shop.com/reg"><h6>还没有账号么 ?  快来创建一个吧！！！</h6></a>
+						<a href="reg"><h6>还没有账号么 ?  快来创建一个吧！！！</h6></a>
 						<a href="javascript:;" class="btn button-default" id="log">LOGIN</a>
 					</form>
 				</div>

@@ -17,6 +17,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
+
 Route::get('index', 'Index\IndexController@index');  //首页展示
 Route::get('reg', 'Login\RegController@reg');  //注册展示
 
@@ -53,4 +55,13 @@ Route::get('pay','Pay\PayController@pay');
 //收货地址
 Route::get('AddressIndex','Address\AddressController@index');
 Route::post('addressDo','Address\AddressController@addressDo');
+
+Route::get('cartlist','cart\CartController@cartList');//购物侧展示列表
+Route::get('delcart','cart\CartController@delCart');//购物车删除
+Route::get('cartnum','cart\CartController@cartnum');//购物车添加购买数量
+
+
+
+
+Route::post('addcart','cart\CartController@addcart');//添加购物车
 
