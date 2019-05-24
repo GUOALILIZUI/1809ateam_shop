@@ -46,3 +46,13 @@ Route::post('register', 'Login\RegController@register');  //注册执行
 Route::get('log', 'Login\LogController@log');  //登录展示
 
 Route::post('login', 'Login\LogController@login');  //登录执行
+
+
+
+Route::get('cartlist','cart\CartController@cartList');//购物侧展示列表
+Route::get('delcart','cart\CartController@delCart');//购物车删除
+Route::get('cartnum','cart\CartController@cartnum');//购物车添加购买数量
+
+
+
+Route::get('addcart','cart\CartController@addcart');//添加购物车
