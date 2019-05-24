@@ -18,8 +18,6 @@ Route::get('/', function () {
 });
 
 Route::get('index', 'Index\IndexController@index');  //首页展示
-
-<<<<<<< HEAD
 Route::get('reg', 'Login\RegController@reg');  //注册展示
 
 Route::post('register', 'Login\RegController@register');  //注册执行
@@ -27,7 +25,6 @@ Route::post('register', 'Login\RegController@register');  //注册执行
 Route::get('log', 'Login\LogController@log');  //登录展示
 
 Route::post('login', 'Login\LogController@login');  //登录执行
-=======
 //支付
 Route::get('payIndex','Pay\PayController@index');
 Route::get('pay','Pay\PayController@pay');
@@ -40,7 +37,6 @@ Route::post('addressDo','Address\AddressController@addressDo');
 
 //订单
 Route::any('orderIndex','Order\OrderController@orderDo');
->>>>>>> pay
 
 Route::get('product/productList','Product\ProductController@productList');   //商品展示
 Route::post('product/products','Product\ProductController@products');        //流加载
