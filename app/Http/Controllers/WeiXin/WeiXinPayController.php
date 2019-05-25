@@ -11,7 +11,7 @@ class WeiXinPayController extends Controller
 {
     /**消息拼接*/
     public $placeUrl="https://api.mch.weixin.qq.com/pay/unifiedorder";  // 统一下单接口
-    public $backUrl="http://team.alilili.top/payBack";  // 支付回调
+    public $backUrl="http://team.alilili.top/wxPayBack";  // 支付回调
 
     /**微信支付测试*/
     public function pay(){
