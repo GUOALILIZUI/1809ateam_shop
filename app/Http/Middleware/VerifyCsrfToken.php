@@ -19,10 +19,13 @@ class VerifyCsrfToken extends Middleware
      * @var array
      */
     protected $except = [
+
         'product/products',
         'product/productStatus',
         'product/wish',
         'wish/wishDel',
         'addressDo',
+        'notify',
+        'orderIndex',
     ];
 }
