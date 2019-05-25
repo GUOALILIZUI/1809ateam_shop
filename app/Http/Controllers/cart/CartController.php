@@ -5,6 +5,7 @@ namespace App\Http\Controllers\cart;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\cart\Cart;
+use App\Model\Product;
 
 class CartController extends Controller
 {
@@ -91,32 +92,61 @@ class CartController extends Controller
         $where=[
             'goods_id'=>$goods_id
         ];
-        //判断存在商品是否存在
+        //判断购物车列表存在商品是否存在
         $res=Cart::where($where)->first();
         if($res){
-            $data = [
-                'goods_name'=>$res->goods_name,
-                'goods_id'=>$res->goods_id,
-                'user_id'=>1,
-                'buy_number'=>1,
-                'ctime'=>time(),
-                'add_price'=>$res->goods_selfprice,
+            //条件
+            $wheres=[
+                'goods_id'=>$goods_id,
+                'user_id'=>1
             ];
-
-            $data_info=Cart::insertGetId($data);
+            $cart_num = $res->buy_number+1;
+            //改数量
+            $data_info=Cart::where($wheres)->update(['buy_number'=>$cart_num]);
             if($data_info){
                 $data = [
-                    'error'=>0,
+                    'status'=>0,
                     'msg' => '添加成功'
                 ];
             }else{
                     $data = [
-                        'error'=>1,
+                        'status'=>1,
                         'msg' => '添加失败'
                     ];
                 }
                 $json=json_encode($data);
                 return $json;
+            }else{
+
+                //查看商品是否存在
+                $Product_info=  Product::where($where)->first();
+                if($Product_info){//如果存在
+                    //TODO
+                    $data = [
+                        'goods_name'=>$Product_info->goods_name,
+                        'goods_id'=>$Product_info->goods_id,
+                        'user_id'=>1,
+                        'buy_number'=>1,
+                        'ctime'=>time(),
+                        'goods_img'=>$Product_info->goods_img,
+                        'add_price'=>$Product_info->goods_selfprice
+                    ];
+                     $ss=Cart::insertGetId($data);
+                    if($ss){
+                        $data = [
+                            'status'=>0,
+                            'msg' => '添加成功'
+                        ];
+
+                    }else{
+                        $data = [
+                            'status'=>1,
+                            'msg' => '添加失败'
+                        ];
+                    }
+                     $json=json_encode($data);
+                    return $json;
+                }
             }
-        }
+    }
 }

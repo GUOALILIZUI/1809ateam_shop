@@ -491,17 +491,18 @@
             //发送到购物车
             $('.btn').click(function () {
                 goods_id = $(this).attr('goods_id');
-                $.ajax({
-                    url: 'addCart',
-                    data: {goods_id: goods_id},
-                    type: 'POST',
-                    dataType: 'json',
-                    success: function (msg) {
-                        if (msg.status == 0) {
-                            layer.msg(msg.msg);
-                        }
-                    }
-                })
+                    cons
+                // $.ajax({
+                //     url: 'addCart',
+                //     data: {goods_id: goods_id},
+                //     type: 'POST',
+                //     dataType: 'json',
+                //     success: function (msg) {
+                //         if (msg.status == 0) {
+                //             layer.msg(msg.msg);
+                //         }
+                //     }
+                // })
             })
         })
     })
