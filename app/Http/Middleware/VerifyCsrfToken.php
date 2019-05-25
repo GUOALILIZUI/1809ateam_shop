@@ -25,7 +25,6 @@ class VerifyCsrfToken extends Middleware
         'addressDo',
         'register',
         'login',
-        //
-        'addcart'
+        'addcart',
     ];
 }
