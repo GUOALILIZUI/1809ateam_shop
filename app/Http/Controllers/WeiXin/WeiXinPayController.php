@@ -24,6 +24,7 @@ class WeiXinPayController extends Controller
         $order_id=$_GET['order_id'];
 
         $orderInfo=DB::table('shop_order')->where('order_id',$order_id)->first();
+//        print_r($orderInfo->order_number);die;
         if($orderInfo->pay_status>1){
             die ('订单已支付，请勿重复支付');
         }
@@ -172,11 +173,17 @@ class WeiXinPayController extends Controller
         $log_str = date('Y-m-d H:i:s') . "\n" . $data . "\n<<<<<<<";
         file_put_contents('/tmp/wx_pay_notice.log',$log_str,FILE_APPEND);
         $xml = simplexml_load_string($data);
+        $order_number=$xml->out_trade_no;
         if($xml->result_code=='SUCCESS' && $xml->return_code=='SUCCESS'){      //微信支付成功回调
             //验证签名
-            $sign = true;
-            if($sign){       //签名验证成功
+            if($xml->sign){
+                if($xml->openid){
+                    DB::table('shop_order')->where('order_number',$order_number)->update(['pay_type'=>2]);
+                }//签名验证成功
                 //TODO 逻辑处理  订单状态更新
+                DB::table('shop_order')->where('order_number',$order_number)->update(['pay_status'=>2,'order_status'=>3]);
+                DB::table('shop_order_detail')->where('order_number',$order_number)->update(['detail_status'=>2]);
+
             }else{
                 //TODO 验签失败
                 echo '验签失败，IP: '.$_SERVER['REMOTE_ADDR'];

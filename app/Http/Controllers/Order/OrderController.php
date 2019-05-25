@@ -13,13 +13,15 @@ class OrderController extends Controller
     //订单入库
     public function orderDo(Request $request)
     {
-        $goods_id='1,2,3';
+        $goods_id2=$_GET['goods_id'];
+        $goods_id=rtrim($goods_id2,',');
+//        $goods_id='1,2,3';
+
         $cc=explode(',',$goods_id);
-//        $uid=session('user_id');
-                $uid=1;
+        $uid=session('user_id');
+//                $uid=1;
 //        $goods_id=$request->input();
         $goodsInfo = DB::table('shop_cart')->where('user_id',$uid)->whereIn('goods_id',$cc)->get();
-
         //订单号
         $order_number=substr(date('his').rand(11,9999).$uid,1,10);
         foreach ($goodsInfo as $k=>$v){
@@ -27,7 +29,6 @@ class OrderController extends Controller
                     $price[]=$v->add_price;
                 }
         }
-
         $add_price=array_sum($price);
 
         $data=[
@@ -39,7 +40,12 @@ class OrderController extends Controller
         ];
 
         $orderId=DB::table('shop_order')->where('user_id',$uid)->insertGetId($data);
-
+//        $goodsInfo2 = DB::table('shop_goods')->whereIn('goods_id',$cc)->get();
+//        foreach ($goodsInfo2 as $k=>$v){
+//            if($v->goods_up==1){
+//                DB::table('shop_goods')->where('goods_id',$v->goods_id)->update(['goods_num',$v->goods_num-$v->buy_number]);
+//            }
+//        }
 
         foreach ($goodsInfo as  $k=>$v){
             $info=[
@@ -54,6 +60,7 @@ class OrderController extends Controller
                 'ctime'=>time()
             ];
             DB::table('shop_order_detail')->where('user_id',$uid)->insertGetId($info);
+            DB::table('shop_cart')->where('goods_id',$v->goods_id)->update(['status'=>2]);
         }
 
         $detailInfo=DB::table('shop_order_detail')->where(['shop_order_detail.order_number'=>$order_number,'shop_order.pay_status'=>1])
