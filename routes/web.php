@@ -29,6 +29,8 @@ Route::post('login', 'Login\LogController@login');  //登录执行
 
 Route::get('product/productList','Product\ProductController@productList');   //商品展示
 Route::post('product/products','Product\ProductController@products');        //流加载
+Route::post('product/productStatus','Product\ProductController@productStatus');   //商品分类 流
+
 
 Route::get('product/shopSingle','Product\ProductController@shopSingle');   //商品详情展示
 Route::post('product/wish','Product\ProductController@wish');    //加入收藏

@@ -20,6 +20,7 @@ class VerifyCsrfToken extends Middleware
      */
     protected $except = [
         'product/products',
+        'product/productStatus',
         'product/wish',
         'wish/wishDel',
         'addressDo',
