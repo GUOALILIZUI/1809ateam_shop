@@ -28,5 +28,9 @@ class VerifyCsrfToken extends Middleware
         'notify',
         'orderIndex',
         'wxPayBack',
+        'register',
+        'login',
+        'addcart',
+
     ];
 }
