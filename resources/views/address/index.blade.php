@@ -86,7 +86,7 @@
 			<div class="container">
 				<div class="row">
 					<div class="col s4">
-						<a href="index.html" class="button-link">
+						<a href="/" class="button-link">
 							<div class="menu-link">
 								<div class="icon">
 									<i class="fa fa-home"></i>
@@ -96,7 +96,7 @@
 						</a>
 					</div>
 					<div class="col s4">
-						<a href="product-list.html" class="button-link">
+						<a href="product/productList" class="button-link">
 							<div class="menu-link">
 								<div class="icon">
 									<i class="fa fa-bars"></i>
@@ -106,7 +106,7 @@
 						</a>
 					</div>
 					<div class="col s4">
-						<a href="shop-single.html" class="button-link">
+						<a href="product/shopSingle" class="button-link">
 							<div class="menu-link">
 								<div class="icon">
 									<i class="fa fa-eye"></i>
@@ -118,7 +118,7 @@
 				</div>
 				<div class="row">
 					<div class="col s4">
-						<a href="wishlist.html" class="button-link">
+						<a href="wish/wishList" class="button-link">
 							<div class="menu-link">
 								<div class="icon">
 									<i class="fa fa-heart"></i>
@@ -128,7 +128,7 @@
 						</a>
 					</div>
 					<div class="col s4">
-						<a href="cart.html" class="button-link">
+						<a href="cartlist" class="button-link">
 							<div class="menu-link">
 								<div class="icon">
 									<i class="fa fa-shopping-cart"></i>

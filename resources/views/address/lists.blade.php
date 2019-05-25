@@ -21,6 +21,14 @@
 	
 	<link rel="shortcut icon" href="img/favicon.png">
 
+
+	<!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+	<!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+
 </head>
 <body>
 
@@ -151,7 +159,7 @@
 				</div>
 				<div class="row">
 					<div class="col s4">
-						<a href="blog.html" class="button-link">
+						<a href="blog.html" class="button-link">	
 							<div class="menu-link">
 								<div class="icon">
 									<i class="fa fa-bold"></i>
@@ -161,7 +169,7 @@
 						</a>
 					</div>
 					<div class="col s4">
-						<a href="blog-single.html" class="button-link">
+						<a href="blog-single.html" class="button-link">	
 							<div class="menu-link">
 								<div class="icon">
 									<i class="fa fa-file-text-o"></i>
@@ -361,34 +369,87 @@
 		</div>
 	</div>
 	<!-- end cart menu -->
-
 	
-	<!-- register -->
-	<div class="pages section">
+	<!-- cart -->
+	<div class="cart section">
 		<div class="container">
 			<div class="pages-head">
-				<h3>REGISTER</h3>
+				<h3>CART</h3>
 			</div>
-			<div class="register">
+			<div class="content">
+				@foreach($arr as $v)
+				<div class="cart-1">
+					<div class="row">
+						<div class="col s5">
+							<h5>Name</h5>
+						</div>
+						<div class="col s7">
+							<h5><a href="">{{$v->user_name}}</a></h5>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col s5">
+							<h5>Address</h5>
+						</div>
+						<div class="col s7">
+							<h5><a href="">{{$v->province}}{{$v->city}}{{$v->detailed}}</a></h5>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col s5">
+							<h5>Tel</h5>
+						</div>
+						<div class="col s7">
+							<h5>{{$v->user_tel}}</h5>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col s5">
+							<h5>Default</h5>
+						</div>
+						<div class="col s7">
+							{{--<h5>--}}
+								<div class="checkbox">
+									<label>
+										<input type="checkbox"> Check me out
+									</label>
+								</div>
+							{{--</h5>--}}
+						</div>
+					</div>
+					<hr/>
+				</div>
+				@endforeach
+			<div class="total">
 				<div class="row">
-					<form class="col s12">
-						<div class="input-field">
-							<input type="text" class="validate" name="user_name" id="user_name" placeholder="NAME" required>
-						</div>
-						<div class="input-field">
-							<input type="email" placeholder="EMAIL" name="user_email" id="user_email" class="validate" required>
-						</div>
-						<div class="input-field">
-							<input type="password" placeholder="PASSWORD" name="user_pass" id="user_pass" class="validate" required>
-						</div>
-						<div class="btn button-default" id="reg">REGISTER</div>
-					</form>
+					<div class="col s7">
+						<h5>Fashion Men's</h5>
+					</div>
+					<div class="col s5">
+						<h5>$21.00</h5>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col s7">
+						<h5>Fashion Men's</h5>
+					</div>
+					<div class="col s5">
+						<h5>$20.00</h5>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col s7">
+						<h6>Total</h6>
+					</div>
+					<div class="col s5">
+						<h6>$41.00</h6>
+					</div>
 				</div>
 			</div>
+			<button class="btn button-default">Process to Checkout</button>
 		</div>
 	</div>
-	<!-- end register -->
-	
+	<!-- end cart -->
 
 	<!-- loader -->
 	<div id="fakeLoader"></div>
@@ -422,63 +483,6 @@
 	<script src="js/fakeLoader.min.js"></script>
 	<script src="js/animatedModal.min.js"></script>
 	<script src="js/main.js"></script>
-	<script src="layui/layui.js"></script>
-	<script type="text/javascript"></script>
-	<script>
-        $(function(){
-            layui.use(['form','layer'], function(){
-                var form = layui.form();
-                var layer=layui.layer;
-                $('#reg').click(function(){
-                    if($('#user_name').val()==''){
-                        layer.msg('请输入您的用户名！');
-                    }else if($('#user_email').val()==''){
-                        layer.msg('请输入您的邮箱!');
-					}else if($('#user_pass').val()==''){
-                        layer.msg('请输入您的密码!');
-                    }else{
-                        var url = "register";
-                        var user_name = $('#user_name').val();
-                        var user_email = $('#user_email').val();
-                        var user_pass = $('#user_pass').val();
-                        $.ajax({
-                            data   : {user_name:user_name,user_email:user_email,user_pass:user_pass},
-                            url : url,
-                            type:'POST',//HTTP请求类
-                            success:function(msg){
-                                console.log(msg);
-                                if(msg.status==1){
-//                                     layer.msg(msg.msg);
-//                                     location.href='reg';
-                                    layer.open({
-                                        type:0,
-                                        content:'注册成功',
-                                        btn:['继续注册','马上去登陆'],
-                                        yes:function(index,layero){
-                                            location.href="reg";
-                                            return true;
-                                        },
-                                        btn2:function(){
-                                            location.href="log";
-                                            return true;
-                                        }
-                                    })
-                                }else if(msg.status==3){
-                                    layer.msg(msg.msg);
-//                                     location.href='reg';
-                                }else if(msg.status==4){
-                                    layer.msg(msg.msg);
-//                                     location.href='reg';
-                                }else{
-                                    layer.msg(msg.msg);
-//                                    location.href='reg';
-                                }
-                            },
-                        });
-                    }
-                })
-            })
-        })
-	</script>
+
 </body>
 </html>
