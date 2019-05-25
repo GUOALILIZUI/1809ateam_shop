@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Product;
 
+use App\Model\Cate;
 use App\Model\Product;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -13,7 +14,13 @@ class ProductController extends Controller
      * 商品展示
      */
     public function productList(){
-        return view('product.productList');
+        //商品分类
+        $where = [
+            'goods_up'=>1
+        ];
+        $data = Product::where($where)->get()->toArray();
+        return view('product.productList',['data'=>$data]);
+
     }
 
     /**
@@ -24,16 +31,48 @@ class ProductController extends Controller
         $page = $Request->input('page',1);
         $pageNum=4;
         $offset = ($page-1)*$pageNum;
-        $arrDataInfo = Product::offset($offset)->limit($page,$pageNum)->get();//每页的数据
+        $data = Product::offset($offset)->limit($page,$pageNum)->get();//每页的数据
         $totalData = Product::count();
         $pageTotal = ceil($totalData/$pageNum);//总条数
-        $objview = view('product.products',['arrDataInfo'=>$arrDataInfo]);
+        $objview = view('product.products',['data'=>$data]);
         $content = response($objview)->getContent();
         $arr['info'] = $content;
         $arr['page'] = $pageTotal;
         return $arr;
     }
 
+    /**
+     * 商品分类
+     */
+    public function productStatus(Request $request){
+        $status = $request->input('status');
+        $arr  = [];
+        if($status==0){
+            $data = Product::get();//每页的数据
+            $objview = view('product.productsCate',['data'=>$data]);
+            $content = response($objview)->getContent();
+            $arr['info'] = $content;
+            return $arr;
+        }else if($status==1){
+            $data = Product::where('goods_best',1)->get();
+            $objview = view('product.productsCate',['data'=>$data]);
+            $content = response($objview)->getContent();
+            $arr['info'] = $content;
+            return $arr;
+        }else if($status==2){
+            $data = Product::where('goods_new',1)->get();
+            $objview = view('product.productsCate',['data'=>$data]);
+            $content = response($objview)->getContent();
+            $arr['info'] = $content;
+            return $arr;
+        }else{
+            $data = Product::where('goods_hot',1)->get();
+            $objview = view('product.productsCate',['data'=>$data]);
+            $content = response($objview)->getContent();
+            $arr['info'] = $content;
+            return $arr;
+        }
+    }
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      * 商品详情

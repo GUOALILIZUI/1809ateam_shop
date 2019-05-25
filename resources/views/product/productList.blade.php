@@ -368,16 +368,16 @@
             <h3>PRODUCT LIST</h3>
         </div>
         <div class="input-field">
-            <select>
-                <option value="">Popular</option>
-                <option value="1">New Product</option>
-                <option value="2">Best Sellers</option>
-                <option value="3">Best Reviews</option>
-                <option value="4">Low Price</option>
-                <option value="5">High Price</option>
+            <select id="cates">
+                <option value="0">全部分类</option>
+                <option value="1">精品</option>
+                <option value="2">新品</option>
+                <option value="3}">热卖</option>
             </select>
         </div>
+        <div class="row" id="cat">
 
+        </div>
         <div class="row" id="productList">
             
         </div>
@@ -431,8 +431,9 @@
         layui.use(['form', 'layer'], function () {
             var form = layui.form();
             var layer = layui.layer;
-            $('.wish').click(function () {
+            $(document).on('click','.wish',function(){
                 goods_id = $(this).attr('goods_id');
+
                 $.ajax({
                     url: 'wish',
                     data: {goods_id: goods_id},
@@ -450,7 +451,7 @@
                 })
             })
             //加入购物车
-            $('.btn').click(function () {
+            $(document).on('click','.btn',function(){
                 goods_id = $(this).attr('goods_id');
                 $.ajax({
                     url: 'addCart',
@@ -464,6 +465,22 @@
                     }
                 })
             })
+
+            //下拉分类
+            $(document).on('change','#cates',function(){
+                status = $(this).val();
+                    var data={};
+                    data.status = status;
+                    $.ajax({
+                        method:"post",
+                        data:data,
+                        url:'productStatus',
+                        dataType:"json",
+                        success:function(msg){
+                            $('#cat').after(msg.info);
+                        }
+                        })
+                    });
         })
     })
 </script>
