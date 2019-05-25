@@ -15,7 +15,8 @@ class OrderController extends Controller
     {
         $goods_id='1,2,3';
         $cc=explode(',',$goods_id);
-        $uid=session('user_id');
+//        $uid=session('user_id');
+                $uid=1;
 //        $goods_id=$request->input();
         $goodsInfo = DB::table('shop_cart')->where('user_id',$uid)->whereIn('goods_id',$cc)->get();
 
@@ -55,7 +56,7 @@ class OrderController extends Controller
             DB::table('shop_order_detail')->where('user_id',$uid)->insertGetId($info);
         }
 
-        $detailInfo=DB::table('shop_order_detail')->where('shop_order_detail.order_number',$order_number)
+        $detailInfo=DB::table('shop_order_detail')->where(['shop_order_detail.order_number'=>$order_number,'shop_order.pay_status'=>1])
             ->join('shop_order','shop_order_detail.order_id','=','shop_order.order_id')
             ->get();
 
@@ -64,26 +65,18 @@ class OrderController extends Controller
             $amount=$v->order_amount;
         }
 
+        $arr=[
+            'amount'=>$amount,
+            'order_id'=>$orderId
+        ];
+
 //        $addressInfo=DB::table('shop_order_address')->where('user_id',$uid)->get();
 
 
 
-
-        return view('order.index',['detailInfo'=>$detailInfo,'amount'=>$amount]);
-
-
-
-
+        return view('order.index',['detailInfo'=>$detailInfo,'arr'=>$arr]);
 
     }
-
-//
-//    public function index(){
-//        $uid=1;
-//        $detailInfo=DB::table('shop_order_detail')->where('user_id',$uid)->get();
-//
-//        return view('order.index');
-//    }
 
 
 }

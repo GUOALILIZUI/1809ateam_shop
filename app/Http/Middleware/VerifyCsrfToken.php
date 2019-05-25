@@ -22,5 +22,6 @@ class VerifyCsrfToken extends Middleware
         'addressDo',
         'notify',
         'orderIndex',
+        'wxPayBack',
     ];
 }

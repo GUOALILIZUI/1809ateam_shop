@@ -429,11 +429,12 @@
 						<h6>Total</h6>
 					</div>
 					<div class="col s5">
-						<h6>${{$amount}}</h6>
+						<h6>${{$arr['amount']}}</h6>
 					</div>
 				</div>
 			</div>
-			<button class="btn button-default">Process to Checkout</button>
+			<a href="/pay?order_id={{$arr['order_id']}}" class="btn button-default">支付宝去支付</a>
+			<a href="/wxPay?order_id={{$arr['order_id']}}" class="btn button-default">微信去支付</a>
 		</div>
 	</div>
 	<!-- end cart -->
