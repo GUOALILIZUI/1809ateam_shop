@@ -21,6 +21,7 @@ class ListsController extends Controller
         }else{
 
             $arr = ['status'=>3,'msg'=>'请先登录'];
+            $arr = json_encode($arr,JSON_UNESCAPED_UNICODE);
             return $arr;
         }
 

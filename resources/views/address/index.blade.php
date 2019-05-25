@@ -27,7 +27,7 @@
 	<div class="navbar-top">
 		<!-- site brand	 -->
 		<div class="site-brand">
-			<a href="index.html"><h1>Mstore</h1></a>
+			<a href="/"><h1>Mstore</h1></a>
 		</div>
 		<!-- end site brand	 -->
 		<div class="side-nav-panel-right">
@@ -46,8 +46,8 @@
 			<li><a href="setting.html"><i class="fa fa-cog"></i>Settings</a></li>
 			<li><a href="about-us.html"><i class="fa fa-user"></i>About Us</a></li>
 			<li><a href="contact.html"><i class="fa fa-envelope-o"></i>Contact Us</a></li>
-			<li><a href="login.html"><i class="fa fa-sign-in"></i>Login</a></li>
-			<li><a href="register.html"><i class="fa fa-user-plus"></i>Register</a></li>
+			<li><a href="log"><i class="fa fa-sign-in"></i>Login</a></li>
+			<li><a href="reg"><i class="fa fa-user-plus"></i>Register</a></li>
 		</ul>
 	</div>
 	<!-- end side nav right-->
@@ -56,19 +56,19 @@
 	<div class="navbar-bottom">
 		<div class="row">
 			<div class="col s2">
-				<a href="index.html"><i class="fa fa-home"></i></a>
+				<a href="/"><i class="fa fa-home"></i></a>
 			</div>
 			<div class="col s2">
-				<a href="wishlist.html"><i class="fa fa-heart"></i></a>
+				<a href="wish/wishList"><i class="fa fa-heart"></i></a>
 			</div>
 			<div class="col s4">
 				<div class="bar-center">
-					<a href="#animatedModal" id="cart-menu"><i class="fa fa-shopping-basket"></i></a>
+					<a href="cartlist" id="cart-menu"><i class="fa fa-shopping-basket"></i></a>
 					<span>2</span>
 				</div>
 			</div>
 			<div class="col s2">
-				<a href="contact.html"><i class="fa fa-envelope-o"></i></a>
+				<a href="lists"><i class="fa fa-envelope-o"></i></a>
 			</div>
 			<div class="col s2">
 				<a href="#animatedModal2" id="nav-menu"><i class="fa fa-bars"></i></a>
@@ -192,7 +192,7 @@
 						</a>
 					</div>
 					<div class="col s4">
-						<a href="about-us.html" class="button-link">
+						<a href="lists" class="button-link">
 							<div class="menu-link">
 								<div class="icon">
 									<i class="fa fa-user"></i>

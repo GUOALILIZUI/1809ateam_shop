@@ -57,19 +57,19 @@
 	<div class="navbar-bottom">
 		<div class="row">
 			<div class="col s2">
-				<a href="index.html"><i class="fa fa-home"></i></a>
+				<a href="/"><i class="fa fa-home"></i></a>
 			</div>
 			<div class="col s2">
-				<a href="wishlist.html"><i class="fa fa-heart"></i></a>
+				<a href="wish/wishList"><i class="fa fa-heart"></i></a>
 			</div>
 			<div class="col s4">
 				<div class="bar-center">
-					<a href="#animatedModal" id="cart-menu"><i class="fa fa-shopping-basket"></i></a>
+					<a href="cartlist" id="cart-menu"><i class="fa fa-shopping-basket"></i></a>
 					<span>2</span>
 				</div>
 			</div>
 			<div class="col s2">
-				<a href="contact.html"><i class="fa fa-envelope-o"></i></a>
+				<a href="lists"><i class="fa fa-envelope-o"></i></a>
 			</div>
 			<div class="col s2">
 				<a href="#animatedModal2" id="nav-menu"><i class="fa fa-bars"></i></a>
@@ -193,7 +193,7 @@
 						</a>
 					</div>
 					<div class="col s4">
-						<a href="about-us.html" class="button-link">
+						<a href="lists" class="button-link">
 							<div class="menu-link">
 								<div class="icon">
 									<i class="fa fa-user"></i>
