@@ -56,7 +56,8 @@ Route::get('addressIndex','Address\AddressController@index'); //收货地址添�
 Route::post('addressDo','Address\AddressController@addressDo');  //添加数据
 
 //订单
-Route::any('orderIndex','Order\OrderController@orderDo'); //订单展示
+Route::post('orderDo','Order\OrderController@orderDo'); //订单展示
+Route::get('orderIndex','Order\OrderController@index'); //订单展示
 
 
 

@@ -59,9 +59,35 @@ class OrderController extends Controller
                 'order_number'=>$order_number,
                 'ctime'=>time()
             ];
-            DB::table('shop_order_detail')->where('user_id',$uid)->insertGetId($info);
+            $orderInfo=DB::table('shop_order_detail')->where('user_id',$uid)->insertGetId($info);
             DB::table('shop_cart')->where('goods_id',$v->goods_id)->update(['status'=>2]);
         }
+        if($orderInfo){
+            $response=[
+                'errno'=>0,
+                'msg'=>'下单成功',
+                'orderId'=>$orderId
+            ];
+            return json_encode($response,JSON_UNESCAPED_UNICODE);
+        }else{
+            $response=[
+                'errno'=>2,
+                'msg'=>'下单失败',
+            ];
+            return json_encode($response,JSON_UNESCAPED_UNICODE);
+        }
+
+    }
+
+
+
+    //详情展示
+    public function index(Request $request){
+
+        $orderId=$request->input('order_id');
+//        $order_number=$request->input('order_number');
+        $orderInfo=DB::table('shop_order')->where('order_id',$orderId)->first();
+        $order_number=$orderInfo->order_number;
 
         $detailInfo=DB::table('shop_order_detail')->where(['shop_order_detail.order_number'=>$order_number,'shop_order.pay_status'=>1])
             ->join('shop_order','shop_order_detail.order_id','=','shop_order.order_id')
@@ -82,7 +108,6 @@ class OrderController extends Controller
 
 
         return view('order.index',['detailInfo'=>$detailInfo,'arr'=>$arr]);
-
     }
 
 
