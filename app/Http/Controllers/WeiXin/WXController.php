@@ -29,8 +29,8 @@ class WXController extends Controller
         return view('weixin.accreditUser');
     }
     public function accreditDo(Request $request){
-        $this->accredit();
-        print_r($this->accredit());die;
+        $response=$this->accredit();
+        print_r($response);die;
         $data = $request->input();
         $user_name = $data['user_name'];
         $user_pass = $data['user_pass'];
