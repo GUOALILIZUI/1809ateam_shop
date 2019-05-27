@@ -454,12 +454,14 @@
             $(document).on('click','.btn',function(){
                 goods_id = $(this).attr('goods_id');
                 $.ajax({
-                    url: 'addCart',
+                    url: '/addcart',
                     data: {goods_id: goods_id},
                     type: 'POST',
                     dataType: 'json',
                     success: function (msg) {
                         if (msg.status == 0) {
+                            layer.msg(msg.msg);
+                        }else{
                             layer.msg(msg.msg);
                         }
                     }
