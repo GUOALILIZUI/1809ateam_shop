@@ -28,6 +28,7 @@ Route::post('register', 'Login\RegController@register');  //注册执行
 Route::post('getcode', 'Login\RegController@getcode');  //短信
 
 Route::get('log', 'Login\LogController@log');  //登录展示
+Route::get('out', 'Login\LogController@out');  //推出登录
 
 Route::post('login', 'Login\LogController@login');  //登录执行
 

@@ -79,4 +79,12 @@ class LogController extends Controller
             header("Refresh:2;url='http://team.alilili.top/accreditUser'");
         }
     }
+
+    public function out()  //退出登录
+    {
+//        cookie('user_id',null);
+       setcookie('user_id', '', -1, '/');
+//        echo $a ;die;
+        return redirect('/');
+    }
 }
