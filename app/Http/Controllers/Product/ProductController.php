@@ -93,7 +93,7 @@ class ProductController extends Controller
 
         if(empty($user_id)){
             $response = [
-                'msg'=>'亲,请先登录，后收藏！',
+                'msg'=>'亲,请先登录！',
                 'status'=>2
             ];
             return $response;
@@ -140,7 +140,7 @@ class ProductController extends Controller
 
         if(empty($user_id)){
             $response = [
-                'msg'=>'亲,请先登录，后收藏！',
+                'msg'=>'亲,请先登录',
                 'status'=>2
             ];
             return json_encode($response,JSON_UNESCAPED_UNICODE);
