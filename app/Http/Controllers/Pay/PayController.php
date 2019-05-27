@@ -151,9 +151,16 @@ class PayController extends Controller
         $data=json_decode($pay,true);
         if($data['trade_status']=='TRADE_SUCCESS'){
             $where=[
-                'order_id'=>$data['out_trade_no'],
+                'order_number'=>$data['out_trade_no'],
             ];
-            DB::table('shop_order')->where($where)->update(['order_pay_status'=>2,'pay_type'=>1]);
+            $time=strtotime($data['notify_time']);
+            $info=[
+                'order_pay_status'=>2,
+                'pay_type'=>2,
+                'pay_time'=>$time,
+                'utime'=>$time
+            ];
+            DB::table('shop_order')->where($where)->update($info);
             DB::table('shop_order_detail')->where($where)->update(['pay_status'=>2]);
 
 
