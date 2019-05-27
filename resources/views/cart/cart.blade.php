@@ -617,7 +617,7 @@
                     dataType:'json',
                     data: { goods_id: goods_id},
                     success: function(data){
-                        location.href = 'orderIndex?order_id='+msg.orderId;
+                        location.href = 'orderIndex?order_id='+data.orderId;
                     },
                     error:function(e){
                         console.log(e);
