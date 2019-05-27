@@ -155,13 +155,13 @@ class PayController extends Controller
             ];
             $time=strtotime($data['notify_time']);
             $info=[
-                'order_pay_status'=>2,
-                'pay_type'=>2,
+                'order_status'=>2,
+                'pay_type'=>1,
                 'pay_time'=>$time,
                 'utime'=>$time
             ];
             DB::table('shop_order')->where($where)->update($info);
-            DB::table('shop_order_detail')->where($where)->update(['pay_status'=>2]);
+            DB::table('shop_order_detail')->where($where)->update(['detail_status'=>2]);
 
         //TODO 验签 更新订单状态
     }
