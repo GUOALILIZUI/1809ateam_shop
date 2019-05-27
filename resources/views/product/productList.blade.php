@@ -45,7 +45,7 @@
         </li>
         <li><a href="javascript:;"><i class="fa fa-cog"></i>Settings</a></li>
         <li><a href="/lists"><i class="fa fa-user"></i>About Us</a></li>
-        <li><a href="/accreditUser"><i class="fa fa-user"></i>Accredit WX</a></li>
+        <li><a href="/accredit"><i class="fa fa-user"></i>Accredit WX</a></li>
         <li><a href="javascript:;"><i class="fa fa-envelope-o"></i>Contact Us</a></li>
         <li><a href="/log"><i class="fa fa-sign-in"></i>Login</a></li>
         <li><a href="/reg"><i class="fa fa-user-plus"></i>Register</a></li>

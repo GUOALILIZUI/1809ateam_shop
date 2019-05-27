@@ -27,6 +27,7 @@ class WXController extends Controller
         if($data){
             $arr = ['status'=>2,'msg'=>'该账户已被绑定'];
             return $arr;
+            header("Refresh:2;url='http://team.alilili.top/'");
         }else{
             $where = [
                 'user_name'=>$responser['nickname'],
