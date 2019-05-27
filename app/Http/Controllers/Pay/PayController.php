@@ -163,9 +163,6 @@ class PayController extends Controller
             DB::table('shop_order')->where($where)->update($info);
             DB::table('shop_order_detail')->where($where)->update(['pay_status'=>2]);
 
-
-        }
-
         //TODO 验签 更新订单状态
     }
     /**
