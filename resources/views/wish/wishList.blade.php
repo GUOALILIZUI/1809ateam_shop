@@ -491,6 +491,7 @@
             //发送到购物车
             $('.btn').click(function () {
                 goods_id = $(this).attr('goods_id');
+<<<<<<< HEAD
                 $.ajax({
                     url: '/addCart',
                     data: {goods_id: goods_id},
@@ -502,6 +503,20 @@
                         }
                     }
                 })
+=======
+                    cons
+                // $.ajax({
+                //     url: 'addCart',
+                //     data: {goods_id: goods_id},
+                //     type: 'POST',
+                //     dataType: 'json',
+                //     success: function (msg) {
+                //         if (msg.status == 0) {
+                //             layer.msg(msg.msg);
+                //         }
+                //     }
+                // })
+>>>>>>> 2736138c13043fbda6a06619b99235571e137726
             })
         })
     })

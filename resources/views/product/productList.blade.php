@@ -454,12 +454,18 @@
             $(document).on('click','.btn',function(){
                 goods_id = $(this).attr('goods_id');
                 $.ajax({
+<<<<<<< HEAD
                     url: '/addCart',
+=======
+                    url: '/addcart',
+>>>>>>> 2736138c13043fbda6a06619b99235571e137726
                     data: {goods_id: goods_id},
                     type: 'POST',
                     dataType: 'json',
                     success: function (msg) {
                         if (msg.status == 0) {
+                            layer.msg(msg.msg);
+                        }else{
                             layer.msg(msg.msg);
                         }
                     }
