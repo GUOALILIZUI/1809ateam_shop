@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 class WXController extends Controller
 {
-    public $response = [];
+    public $openidInfo = [];
     public function accredit(){
         $scope = "snsapi_userinfo";
         $url = urlEncode ("http://team.alilili.top/code");
@@ -19,7 +19,7 @@ class WXController extends Controller
         $code = $data['code'];
         $url = 'https://api.weixin.qq.com/sns/oauth2/access_token?appid='.env('WX_APPID').'&secret='.env('WX_SECRET').'&code='.$code.'&grant_type=authorization_code';
         $responser = json_decode(file_get_contents($url),true);
-        $this->response = $responser;
+        $this->openidInfo = $responser;
         header('Refresh:1;url="http://team.alilili.top/accreditUser"');
     }
     public function accreditUser(){
@@ -38,7 +38,7 @@ class WXController extends Controller
             }
             $user_id=$arr->user_id;
 
-            print_r($this->response);die;
+            print_r($this->openidInfo);die;
             $arr = DB::table('shop_wx_user')->where('openid',$this->response['openid'])->first();
             if($arr){
                 $arr = ['status'=>2,'msg'=>'该账户已被绑定'];
