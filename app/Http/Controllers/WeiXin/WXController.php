@@ -15,9 +15,11 @@ class WXController extends Controller
     }
     public function code(Request $request){
         $data = $this->accreditDo();
+
         $code = $data['code'];
         $user_name = $data['user_name'];
         $user_pass = $data['user_pass'];
+        print_r($code);die;
         $url = 'https://api.weixin.qq.com/sns/oauth2/access_token?appid='.env('WX_APPID').'&secret='.env('WX_SECRET').'&code='.$code.'&grant_type=authorization_code';
         $responser = json_decode(file_get_contents($url),true);
         $accessToken = $responser['access_token'];
@@ -58,9 +60,14 @@ class WXController extends Controller
     }
     public function accreditDo(Request $request){
         $data = $request->input();
-        $code = $data['code'];
+        $code = $_GET['code'];
         $user_name = $data['user_name'];
         $user_pass = $data['user_pass'];
+        $data = [
+            'code'=>$code,
+            'user_name'=>$user_name,
+            'user_pass'=>$user_pass
+        ];
        return $data;
     }
     /**
