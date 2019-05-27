@@ -62,20 +62,20 @@ class OrderController extends Controller
             $orderInfo=DB::table('shop_order_detail')->where('user_id',$uid)->insertGetId($info);
             DB::table('shop_cart')->where('goods_id',$v->goods_id)->update(['status'=>2]);
         }
-        if($orderInfo){
+//        if($orderInfo){
             $response=[
                 'errno'=>0,
                 'msg'=>'下单成功',
                 'orderId'=>$orderId
             ];
             return json_encode($response,JSON_UNESCAPED_UNICODE);
-        }else{
-            $response=[
-                'errno'=>2,
-                'msg'=>'下单失败',
-            ];
-            return json_encode($response,JSON_UNESCAPED_UNICODE);
-        }
+//        }else{
+//            $response=[
+//                'errno'=>2,
+//                'msg'=>'下单失败',
+//            ];
+//            return json_encode($response,JSON_UNESCAPED_UNICODE);
+////        }
 
     }
 
