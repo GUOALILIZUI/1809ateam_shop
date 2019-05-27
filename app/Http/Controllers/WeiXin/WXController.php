@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 class WXController extends Controller
 {
-    public $response;
+    public $response = [];
     public function accredit(){
         $scope = "snsapi_userinfo";
         $url = urlEncode ("http://team.alilili.top/code");
@@ -40,6 +40,7 @@ class WXController extends Controller
             $user_id=$arr->user_id;
 
             $response = $this->response;
+//            echo "<pre>";print_r($response);echo "</pre>";die;
             $openid = $response['openid'];
             $arr = DB::table('shop_wx_user')->where('openid',$openid)->first();
             if($arr){
