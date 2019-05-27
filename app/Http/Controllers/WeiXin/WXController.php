@@ -38,8 +38,8 @@ class WXController extends Controller
                 return $arr;
             }
             $user_id=$arr->user_id;
-            
-            $this->response['openid'];
+
+            print_r($this->response);die;
             $arr = DB::table('shop_wx_user')->where('openid',$this->response['openid'])->first();
             if($arr){
                 $arr = ['status'=>2,'msg'=>'该账户已被绑定'];
@@ -47,7 +47,7 @@ class WXController extends Controller
             }else{
                 $where = [
                     'wx_user_name'=>$this->response['nickname'],
-                    'openid'=>$openid,
+                    'openid'=>$this->response['openid'],
                     'user_id'=>$user_id
                 ];
                 $data = DB::table('shop_wx_user')->insert($where);
