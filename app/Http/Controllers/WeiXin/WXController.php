@@ -27,7 +27,7 @@ class WXController extends Controller
                 'status'=>40004
             ];
             echo json_encode($response,JSON_UNESCAPED_UNICODE);
-            header("Refresh:2;url='http://team.alilili.top/log'");
+            header("Refresh:2;url='http://team.alilili.top/log'");die;
         }
 
         $data = DB::table('shop_user')->where('openid',$openid)->first();
