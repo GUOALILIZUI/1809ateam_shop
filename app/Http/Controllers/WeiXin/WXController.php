@@ -41,9 +41,9 @@ class WXController extends Controller
 
             $response = $this->response;
             $openid = $response['openid'];
-            $arr = DB::table('shop_user')->where('openid',$openid)->first();
+            $arr = DB::table('shop_wx_user')->where('openid',$openid)->first();
             if($arr){
-                $arr = ['status'=>2,'msg'=>'该账户已绑定'];
+                $arr = ['status'=>2,'msg'=>'该账户已被绑定'];
                 return $arr;
             }else{
                 $where = [
