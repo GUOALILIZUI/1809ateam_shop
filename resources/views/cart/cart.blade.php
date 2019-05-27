@@ -274,9 +274,20 @@
                                     <h5>Quantity</h5>
                                 </div>
                                 <div class="col s7">
-                                    <input value={{$v->buy_number}} type="text">
+                                    <input value={{$v->buy_number}} type="text" class="nm" cart_id={{$v->cart_id}}>
                                 </div>
                             </div>
+                                <div class="row">
+                                    <div class="col s5">
+                                        <h5>选择结账</h5>
+                                    </div>
+                                    <div class="col s7">
+                                        <input type="hidden" value={{$v->add_price *  $v->buy_number}}>
+                                        <button class="zzz" type="button" style="background: #737383" goods_id={{$v->goods_id}}>
+                                            未选择
+                                        </button>
+                                    </div>
+                                </div>
                             <div class="row">
                                 <div class="col s5">
                                     <h5>Price</h5>
@@ -301,18 +312,10 @@
                 <div class="total">
                     <div class="row">
                         <div class="col s7">
-                            <h5>Fashion Men's</h5>
+                            <h6>订单价格</h6>
                         </div>
                         <div class="col s5">
-                            <h5>$21.00</h5>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col s7">
-                            <h5>Fashion Men's</h5>
-                        </div>
-                        <div class="col s5">
-                            <h5>$21.00</h5>
+                            <h6 id="csf">￥0</h6>
                         </div>
                     </div>
                     <div class="row">
@@ -320,17 +323,17 @@
                             <h6>Total</h6>
                         </div>
                         <div class="col s5">
-                            <h6>$41.00</h6>
+                            <h6>{{$num}}</h6>
                         </div>
                     </div>
                 </div>
-                <button class="btn button-default">Process to Checkout</button>
+                <button class="btn button-default" id="zz">Process to Checkout</button>
             </div>
         </div>
     </div>
 </div>
 <!-- end cart menu -->
-
+<tbody>
 <!-- cart -->
 <div class="cart section">
     <div class="container">
@@ -363,7 +366,8 @@
                             <h5>数量</h5>
                         </div>
                         <div class="col s7">
-                            <input value={{$v->buy_number}} type="text" class="num" cart_id={{$v->cart_id}}>
+                            <input type="hidden"  class='name' price={{$v->add_price}}>
+                            <input value={{$v->buy_number}}   type="text" class="num" cart_id={{$v->cart_id }}>
                         </div>
                     </div>
                     <div class="row">
@@ -371,7 +375,9 @@
                             <h5>价格</h5>
                         </div>
                         <div class="col s7">
-                            <h5>{{$v->add_price}}</h5>
+                            <div>
+                                <td class='zj'>{{$v->add_price *  $v->buy_number}}</td>
+                            </div>
                         </div>
                     </div>
                     <div class="row">
@@ -379,7 +385,8 @@
                             <h5>选择结账</h5>
                         </div>
                         <div class="col s7">
-                            <button class="btn button-default ccc" type="button" style="background: #737383" goods_id={{$v->goods_id}}>
+                            <input type="hidden" value={{$v->add_price *  $v->buy_number}}>
+                            <button class="ccc" type="button" style="background: #737383" goods_id={{$v->goods_id}}>
                                 未选择
                             </button>
                         </div>
@@ -399,6 +406,16 @@
         <div class="total">
             <div class="row">
                 <div class="col s7">
+                    <h6>订单价格</h6>
+                </div>
+                <div class="col s5">
+                    <h6 id="zxc">￥0</h6>
+                </div>
+            </div>
+        </div>
+        <div class="total">
+            <div class="row">
+                <div class="col s7">
                     <h6>总价</h6>
                 </div>
                 <div class="col s5">
@@ -409,6 +426,7 @@
         <button class="btn button-default" id="dd">生成订单</button>
     </div>
 </div>
+</tbody>
 <!-- end cart -->
 
 <!-- loader -->
@@ -444,11 +462,6 @@
 <script src="js/animatedModal.min.js"></script>
 <script src="js/main.js"></script>
 <script src="layui/layui.js"></script>
-<!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-<!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
 </body>
 </html>
@@ -503,13 +516,51 @@
                     },'json'
                 );
             })
-            $(document).on('click','.ccc',function(){
 
+
+            //cc
+            //购买数量
+            $(".nm").blur(function () {
+                var z= /^[1-9]$/;
+                var num=$(this).val();
+                var zc=$(this).attr('cart_id');
+                if(!z.test(num)){
+                    layer.msg('必须填写数字');
+                    $(this).val(1);
+                    return false;
+                }
+                if(num == 10){
+                    layer.msg('一次性只能购买9');
+                    $(this).val(9);
+                    return false;
+                }
+                $.get(
+                    'cartnum',
+                    {num:num,zc:zc},
+                    function(data) {
+                        if(data.error==0){
+                            layer.msg(data.msg);
+                            window.location.reload();
+                        }else{
+                            layer.msg('on');
+                        }
+                    },'json'
+                );
+            })
+            $(document).on('click','.ccc',function(){
+                var ss = 0;
                 if($(this).text() == '已选择√'){
                     $(this).text('未选择');
                 }else{
                     $(this).text('已选择√');
                 }
+                $(".ccc").each(function(){
+                    if($(this).text() == '已选择√'){
+                        var i=parseInt($(this).prev().val());
+                        ss += i;
+                    }
+                });
+                $('#zxc').text('￥'+ss);
             })
             $(document).on('click','#dd',function(){
                 var goods_id= '';
@@ -526,10 +577,47 @@
                     'orderDo',
                     {goods_id:goods_id},
                     function(msg){
-                            if(msg.erron == 0 ){
-                                console.log('orderIndex?order_id='+msg.orderId);
-                            }
+                        if(msg.erron == 0 ){
+                            console.log('orderIndex?order_id='+msg.orderId);
+                        }
+                    },'json'
+                )
+            })
+            $(document).on('click','.zzz',function(){
+                var ss = 0;
+                if($(this).text() == '已选择√'){
+                    $(this).text('未选择');
+                }else{
+                    $(this).text('已选择√');
+                }
+                $(".ccc").each(function(){
+                    if($(this).text() == '已选择√'){
+                        var i=parseInt($(this).prev().val());
+                        ss += i;
                     }
+                });
+                $('#csf').text('￥'+ss);
+            })
+            $(document).on('click','#zz',function(){
+                var goods_id= '';
+                $(".zzz").each(function(){
+                    if($(this).text() == '已选择√'){
+                        goods_id +=$(this).attr('goods_id')+',';
+
+                    }
+                });
+                if(goods_id == ''){
+                    alert('请选择');
+                    return false;
+                }
+                $.post(
+                    'orderDo',
+                    {goods_id:goods_id},
+                    function(msg){
+                        if(msg.erron == 0 ){
+                            console.log('orderIndex?order_id='+msg.orderId);
+                        }
+                    },'json'
                 )
             })
 
