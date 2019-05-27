@@ -58,7 +58,7 @@ class PayController extends Controller
         $bizcont = [
             'subject' => 'Lening-Order: ' . $order_id, //order_id
             'out_trade_no' => $order_info->order_number,        //订单号
-            'total_amount' => $order_info->order_amount,
+            'total_amount' => $order_info->true_amount,
             'product_code' => 'QUICK_WAP_WAY',
         ];
         //公共参数
