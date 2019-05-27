@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Login;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\DB;
 
 
@@ -32,8 +33,8 @@ class LogController extends Controller
 
             $user_id=$arr->user_id;
 //            var_dump($user_id);exit;
-            session(['user_id'=>$user_id]);
-
+//            session(['user_id'=>$user_id]);
+            Cookie::queue('user_id',$user_id);
             $arr = ['status'=>1,'msg'=>'登录成功'];
             return $arr;
         }else{

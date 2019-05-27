@@ -10,10 +10,10 @@ class ListsController extends Controller
 {
     public function lists(Request $request)
     {
-        $session_id = $request->session()->get('user_id');
-
-        if ($session_id){
-            $arr = DB::table('shop_order_address')->where('user_id',$session_id)->get();
+        $cookie_id = $request->cookie('user_id');
+//        print_r($cookie_id);die;
+        if ($cookie_id){
+            $arr = DB::table('shop_order_address')->where('user_id',$cookie_id)->get();
 //            print_r($arr);exit;
 
             return view('address.lists',['arr'=>$arr]);
