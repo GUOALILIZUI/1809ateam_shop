@@ -21,36 +21,6 @@ class WXController extends Controller
         $user_id = $request->cookie('user_id');
         $openid = $responser['openid'];
 
-        if(empty($user_id)){
-            $response = [
-                'msg'=>'登陆后绑定微信,才能第三方登录！',
-                'status'=>40004
-            ];
-            echo json_encode($response,JSON_UNESCAPED_UNICODE);
-            header("Refresh:2;url='http://team.alilili.top/log'");die;
-        }
-
-        $data = DB::table('shop_user')->where('openid',$openid)->first();
-
-        if($data){
-            $responser = [
-                'erron'=>'40005',
-                'msg'=>'账号已绑定'
-            ];
-            echo json_encode($responser,JSON_UNESCAPED_UNICODE);
-            header("Refresh:2;url='http://team.alilili.top/'");
-        }else{
-            $arr = [
-                'openid'=>$openid
-            ];
-            $data = DB::table('shop_user')->where('user_id',$user_id)->insert($arr);
-            $responser = [
-                'erron'=>'0',
-                'msg'=>'绑定成功'
-            ];
-            echo json_encode($responser,JSON_UNESCAPED_UNICODE);
-            header("Refresh:2;url='http://team.alilili.top/'");
-        }
     }
     /**
      * @return mixed
