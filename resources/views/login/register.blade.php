@@ -435,9 +435,9 @@
 	<script src="js/leftTime.min.js"></script>
 	<script>
         $(function(){
-            layui.use(['form','layer'], function(){
-                var form = layui.form();
-                var layer=layui.layer;
+                    layui.use(['form','layer'], function(){
+                        var form = layui.form();
+                        var layer=layui.layer;
                 $('#reg').click(function(){
                     if($('#user_name').val()==''){
                         layer.msg('请输入您的用户名！');
