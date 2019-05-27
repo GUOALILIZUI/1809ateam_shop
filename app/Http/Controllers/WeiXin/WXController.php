@@ -61,6 +61,7 @@ class WXController extends Controller
     public function accreditDo(Request $request){
         $data = $request->input();
         $code = $_GET['code'];
+        print_r($code);die;
         $user_name = $data['user_name'];
         $user_pass = $data['user_pass'];
         $data = [
