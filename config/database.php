@@ -52,8 +52,8 @@ return [
             'username' => env('DB_USERNAME', 'forge'),
             'password' => env('DB_PASSWORD', ''),
             'unix_socket' => env('DB_SOCKET', ''),
-            'charset' => 'utf8mb4',
-            'collation' => 'utf8mb4_unicode_ci',
+            'charset' => 'utf8',
+            'collation' => 'utf8_bin',
             'prefix' => '',
             'prefix_indexes' => true,
             'strict' => true,
@@ -119,10 +119,10 @@ return [
 
     'redis' => [
 
-        'client' => env('REDIS_CLIENT', 'predis'),
+        'client' => env('REDIS_CLIENT', 'phpredis'),
 
         'options' => [
-            'cluster' => env('REDIS_CLUSTER', 'predis'),
+            'cluster' => env('REDIS_CLUSTER', 'phpredis'),
             'prefix' => Str::slug(env('APP_NAME', 'laravel'), '_').'_database_',
         ],
 

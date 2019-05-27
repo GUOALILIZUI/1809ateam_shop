@@ -36,7 +36,7 @@
 	<div class="navbar-top">
 		<!-- site brand	 -->
 		<div class="site-brand">
-			<a href="AddressIndex"><h1>添加地址</h1></a>
+			<a href="addressIndex"><h1>添加地址</h1></a>
 		</div>
 		<!-- end site brand	 -->
 		<div class="side-nav-panel-right">
@@ -115,7 +115,7 @@
 						</a>
 					</div>
 					<div class="col s4">
-						<a href="product/shopSingle" class="button-link">
+						<a href="javascript:;" class="button-link">
 							<div class="menu-link">
 								<div class="icon">
 									<i class="fa fa-eye"></i>
@@ -374,17 +374,22 @@
 	<div class="cart section">
 		<div class="container">
 			<div class="pages-head">
-				<h3>CART</h3>
+				<h3>地址</h3>
 			</div>
 			<div class="content">
-				@foreach($arr as $v)
+				@if($res == '')
+					<div>
+						<h4>空空如也...  快去添加吧！！！</h4>
+					</div>
+				@else
+				{{--@foreach($arr as $v)--}}
 				<div class="cart-1">
 					<div class="row">
 						<div class="col s5">
 							<h5>Name</h5>
 						</div>
 						<div class="col s7">
-							<h5><a href="">{{$v->user_name}}</a></h5>
+							<h5><a href="">{{$res->user_name}}</a></h5>
 						</div>
 					</div>
 					<div class="row">
@@ -392,7 +397,7 @@
 							<h5>Address</h5>
 						</div>
 						<div class="col s7">
-							<h5><a href="">{{$v->province}}{{$v->city}}{{$v->detailed}}</a></h5>
+							<h5><a href="">{{$res->province}}{{$res->city}}{{$res->detailed}}</a></h5>
 						</div>
 					</div>
 					<div class="row">
@@ -400,7 +405,7 @@
 							<h5>Tel</h5>
 						</div>
 						<div class="col s7">
-							<h5>{{$v->user_tel}}</h5>
+							<h5>{{$res->user_tel}}</h5>
 						</div>
 					</div>
 					<div class="row">
@@ -419,34 +424,8 @@
 					</div>
 					<hr/>
 				</div>
-				@endforeach
-			<div class="total">
-				<div class="row">
-					<div class="col s7">
-						<h5>Fashion Men's</h5>
-					</div>
-					<div class="col s5">
-						<h5>$21.00</h5>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col s7">
-						<h5>Fashion Men's</h5>
-					</div>
-					<div class="col s5">
-						<h5>$20.00</h5>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col s7">
-						<h6>Total</h6>
-					</div>
-					<div class="col s5">
-						<h6>$41.00</h6>
-					</div>
-				</div>
-			</div>
-			<button class="btn button-default">Process to Checkout</button>
+				{{--@endforeach--}}
+				@endif
 		</div>
 	</div>
 	<!-- end cart -->

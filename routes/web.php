@@ -68,6 +68,11 @@ Route::post('addressDo','Address\AddressController@addressDo');  //添加数据
 Route::post('orderDo','Order\OrderController@orderDo'); //订单展示
 Route::get('orderIndex','Order\OrderController@index'); //订单展示
 
+//微信授权
+Route::get('accredit','WeiXin\WXController@accredit');  //微信授权
+Route::get('code','WeiXin\WXController@code');  //微信授权
+Route::get('accessToken','WeiXin\WXController@accessToken'); //获取微信accessToken
+
 
 
 

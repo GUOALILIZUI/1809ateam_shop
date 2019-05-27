@@ -15,8 +15,9 @@ class ListsController extends Controller
         if ($cookie_id){
             $arr = DB::table('shop_order_address')->where('user_id',$cookie_id)->get();
 //            print_r($arr);exit;
+            $res = DB::table('shop_order_address')->where('user_id',$cookie_id)->where('goods_status',2)->first();
 
-            return view('address.lists',['arr'=>$arr]);
+            return view('address.lists',['arr'=>$arr,'res'=>$res]);
 
         }else{
 
