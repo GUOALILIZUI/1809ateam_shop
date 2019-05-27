@@ -73,7 +73,7 @@ class LogController extends Controller
         }else{
             $responser = [
                 'erron'=>'40005',
-                'msg'=>'账号未能绑定微信，请先用账号密码登录，去个人中心绑定！'
+                'msg'=>'账号未能绑定微信，去个人中心绑定！'
             ];
             echo json_encode($responser,JSON_UNESCAPED_UNICODE);
             header("Refresh:2;url='http://team.alilili.top/log'");

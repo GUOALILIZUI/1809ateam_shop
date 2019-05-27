@@ -30,5 +30,6 @@ class VerifyCsrfToken extends Middleware
         'login',
         'addcart',
         'orderDo',
+        'accreditDo',
     ];
 }
