@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 class WXController extends Controller
 {
+    public $response;
     public function accredit(){
         $scope = "snsapi_userinfo";
         $url = urlEncode ("http://team.alilili.top/code");
@@ -18,9 +19,50 @@ class WXController extends Controller
         $code = $data['code'];
         $url = 'https://api.weixin.qq.com/sns/oauth2/access_token?appid='.env('WX_APPID').'&secret='.env('WX_SECRET').'&code='.$code.'&grant_type=authorization_code';
         $responser = json_decode(file_get_contents($url),true);
+<<<<<<< HEAD
         $user_id = $request->cookie('user_id');
         $openid = $responser['openid'];
 
+=======
+        $this->response = $responser;
+        header("url='http://team.alilili.top/accreditUser'");
+    }
+    public function accreditUser(){
+        return view('weixin.accreditUser');
+    }
+    public function accreditDo(Request $request){
+        $data = $request->input();
+        $user_name = $data['user_name'];
+        $user_pass = $data['user_pass'];
+
+        $arr = DB::table('shop_user')->where('user_name',$user_name)->first();
+        if ($arr){
+            if ($user_pass != $arr->user_pass){
+                $arr = ['status'=>1,'msg'=>'账号或密码错误'];
+                return $arr;
+            }
+            $user_id=$arr->user_id;
+
+            $response = $this->response;
+            $openid = $response['openid'];
+            $arr = DB::table('shop_user')->where('openid',$openid)->first();
+            if($arr){
+                $arr = ['status'=>2,'msg'=>'该账户已绑定'];
+                return $arr;
+            }else{
+                $where = [
+                    'wx_user_name'=>$response['nickname'],
+                    'openid'=>$openid,
+                    'user_id'=>$user_id
+                ];
+                $data = DB::table('shop_wx_user')->insert($where);
+                if($data){
+                    $arr = ['status'=>0,'msg'=>'绑定成功'];
+                    return $arr;
+                }
+            }
+        }
+>>>>>>> goods
     }
     /**
      * @return mixed

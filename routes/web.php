@@ -76,6 +76,8 @@ Route::get('orderIndex','Order\OrderController@index'); //订单展示
 //微信授权
 Route::get('accredit','WeiXin\WXController@accredit');  //微信授权
 Route::get('code','WeiXin\WXController@code');  //微信授权
+Route::get('accreditUser','WeiXin\WXController@accreditUser'); //获取用户绑定微信的账户
+Route::post('accreditDo','WeiXin\WXController@accreditDo'); //用户绑定微信执行
 Route::get('accessToken','WeiXin\WXController@accessToken'); //获取微信accessToken
 
 
