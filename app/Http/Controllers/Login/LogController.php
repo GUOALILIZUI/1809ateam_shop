@@ -42,4 +42,41 @@ class LogController extends Controller
             return $arr;
         }
     }
+
+    public function wxLog(){
+        $scope = "snsapi_userinfo";
+        $url = urlEncode ("http://team.alilili.top/code");
+        $url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid='.env('WX_APPID').'&redirect_uri='.$url.'&response_type=code&scope='.$scope.'&state=STATE#wechat_redirect';
+        header('Location:'.$url);
+    }
+    public function wxCode(Request $request){
+        $data = $request->input();
+        $code = $data['code'];
+        $url = 'https://api.weixin.qq.com/sns/oauth2/access_token?appid='.env('WX_APPID').'&secret='.env('WX_SECRET').'&code='.$code.'&grant_type=authorization_code';
+        $responser = json_decode(file_get_contents($url),true);
+        $openid = $responser['openid'];
+        $accessToken = $responser['access_token'];
+        $data = DB::table('shop_user')->where('openid',$openid)->first();
+
+        if($data){
+            $url = "https://api.weixin.qq.com/sns/userinfo?access_token=$accessToken&openid=$openid&lang=zh_CN";
+            $arr = json_decode(file_get_contents($url),true);
+            $user_name = $arr['nickname'];
+            $responser = [
+                'erron'=>'0',
+                'msg'=>'欢迎'.$user_name.'登陆,正在跳转首页'
+            ];
+            echo json_encode($responser,JSON_UNESCAPED_UNICODE);
+            $user_id=$data->user_id;
+            Cookie::queue('user_id',$user_id);
+            header("Refresh:2;url='http://team.alilili.top/'");
+        }else{
+            $responser = [
+                'erron'=>'40005',
+                'msg'=>'账号未能绑定微信，请先用账号密码登录，去个人中心绑定！'
+            ];
+            echo json_encode($responser,JSON_UNESCAPED_UNICODE);
+            header("Refresh:2;url='http://team.alilili.top/log'");
+        }
+    }
 }

@@ -20,9 +20,16 @@ class WXController extends Controller
         $responser = json_decode(file_get_contents($url),true);
         $user_id = $request->cookie('user_id');
         $openid = $responser['openid'];
-        $arr = [
-            'openid'=>$openid
-        ];
+
+        if(empty($user_id)){
+            $response = [
+                'msg'=>'登陆后才能绑定微信哦，亲！',
+                'status'=>40004
+            ];
+            echo json_encode($response,JSON_UNESCAPED_UNICODE);
+            header("Refresh:2;url='http://team.alilili.top/log'");
+        }
+
         $data = DB::table('shop_user')->where('openid',$openid)->first();
 
         if($data){
@@ -31,15 +38,18 @@ class WXController extends Controller
                 'msg'=>'账号已绑定'
             ];
             echo json_encode($responser,JSON_UNESCAPED_UNICODE);
-            header("Refresh:2;url='http://team.alilili.top'");
+            header("Refresh:2;url='http://team.alilili.top/'");
         }else{
+            $arr = [
+                'openid'=>$openid
+            ];
             $data = DB::table('shop_user')->where('user_id',$user_id)->insert($arr);
             $responser = [
                 'erron'=>'0',
                 'msg'=>'绑定成功'
             ];
             echo json_encode($responser,JSON_UNESCAPED_UNICODE);
-            header("Refresh:2;url='http://team.alilili.top'");
+            header("Refresh:2;url='http://team.alilili.top/'");
         }
     }
     /**
