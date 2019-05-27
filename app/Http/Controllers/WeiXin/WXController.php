@@ -11,7 +11,7 @@ class WXController extends Controller
     public function accredit(){
         $scope = "snsapi_userinfo";
         $url = urlEncode ("http://team.alilili.top/code");
-        $url = 'https://open.   weixin.qq.com/connect/oauth2/authorize?appid='.env('WX_APPID').'&redirect_uri='.$url.'&response_type=code&scope='.$scope.'&state=STATE#wechat_redirect';
+        $url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid='.env('WX_APPID').'&redirect_uri='.$url.'&response_type=code&scope='.$scope.'&state=STATE#wechat_redirect';
         header('Location:'.$url);
     }
     public function code(Request $request){
@@ -20,10 +20,11 @@ class WXController extends Controller
         $url = 'https://api.weixin.qq.com/sns/oauth2/access_token?appid='.env('WX_APPID').'&secret='.env('WX_SECRET').'&code='.$code.'&grant_type=authorization_code';
         $responser = json_decode(file_get_contents($url),true);
         $this->openidInfo = $responser;
+
         header('Refresh:1;url="http://team.alilili.top/accreditUser"');
     }
     public function accreditUser(){
-        print_r($this->openidInfo);
+        print_r($this->openidInfo);die;
         return view('weixin.accreditUser');
     }
     public function accreditDo(Request $request){
