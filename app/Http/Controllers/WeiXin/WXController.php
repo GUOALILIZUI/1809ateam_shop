@@ -29,6 +29,8 @@ class WXController extends Controller
         return view('weixin.accreditUser');
     }
     public function accreditDo(Request $request){
+        $response = $this->accredit();
+        print_r($response);die;
         $data = $request->input();
         $user_name = $data['user_name'];
         $user_pass = $data['user_pass'];
@@ -41,8 +43,7 @@ class WXController extends Controller
             }
             $user_id=$arr->user_id;
 
-            $response = $this->accredit();
-            print_r($response);die;
+
             $arr = DB::table('shop_wx_user')->where('openid',$response['openid'])->first();
             if($arr){
                 $arr = ['status'=>2,'msg'=>'该账户已被绑定'];
