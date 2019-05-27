@@ -44,7 +44,7 @@
 				<img src="img/profile.jpg" alt="">
 				<h2>John Doe</h2>
 			</li>
-			<li><a href="javascript:;"><i class="fa fa-cog"></i>Settings</a></li>
+			<li><a href="out"><i class="fa fa-cog" id="out"></i>退出登录</a></li>
 			<li><a href="lists"><i class="fa fa-user"></i>About Us</a></li>
 			<li><a href="javascript:;"><i class="fa fa-envelope-o"></i>Contact Us</a></li>
 			<li><a href="log"><i class="fa fa-sign-in"></i>Login</a></li>
@@ -564,6 +564,7 @@
 	<script src="js/fakeLoader.min.js"></script>
 	<script src="js/animatedModal.min.js"></script>
 	<script src="js/main.js"></script>
+	<script src="layui/layui.js"></script>
 
 </body>
 </html>
