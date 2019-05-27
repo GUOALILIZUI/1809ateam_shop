@@ -611,15 +611,23 @@
                     alert('请选择');
                     return false;
                 }
-                $.post(
-                    'orderDo',
-                    {goods_id:goods_id},
-                    function(msg){
-                        if(msg.errno == 0 ){
-                           location.href = 'orderIndex?order_id='+msg.orderId;
-                        }
-                    },'json'
-                )
+                // $.ajax(
+                //     'orderDo',
+                //     {goods_id:goods_id},
+                //     function(msg){
+                //         if(msg.errno == 0 ){
+                //            location.href = 'orderIndex?order_id='+msg.orderId;
+                //         }
+                //     },'json'
+                // )
+                $.ajax({
+                      method: "POST",
+                      url: 'orderDo',
+                      dataType:'json',
+                      data: { goods_id: goods_id}
+                  }).done(function( msg ) {
+                     location.href = 'orderIndex?order_id='+msg.orderId;
+                    });
             })
 
         });
