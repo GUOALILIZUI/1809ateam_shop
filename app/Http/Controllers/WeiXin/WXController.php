@@ -43,6 +43,7 @@ class WXController extends Controller
             if($data){
                 $arr = ['status'=>0,'msg'=>'绑定成功'];
                 return $arr;
+                header("Refresh:2;url='http://team.alilili.top/'");
             }
         }
     }
