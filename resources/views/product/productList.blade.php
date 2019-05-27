@@ -454,7 +454,7 @@
             $(document).on('click','.btn',function(){
                 goods_id = $(this).attr('goods_id');
                 $.ajax({
-                    url: 'addCart',
+                    url: '/addCart',
                     data: {goods_id: goods_id},
                     type: 'POST',
                     dataType: 'json',
