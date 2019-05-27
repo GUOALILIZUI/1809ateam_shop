@@ -410,26 +410,26 @@
 			<div class="total">
 				<div class="row">
 					<div class="col s7">
-						<h5>Fashion Men's</h5>
+						<h5>优惠券</h5>
 					</div>
 					<div class="col s5">
-						<h5>$21.00</h5>
+						<h5>￥{{$arr['discounts']}}</h5>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col s7">
-						<h5>Fashion Men's</h5>
+						<h5>总金额</h5>
 					</div>
 					<div class="col s5">
-						<h5>$20.00</h5>
+						<h5>￥{{$arr['amount']}}</h5>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col s7">
-						<h6>Total</h6>
+						<h6>实付金额</h6>
 					</div>
 					<div class="col s5">
-						<h6>${{$arr['amount']}}</h6>
+						<h6>￥{{$arr['true_amount']}}</h6>
 					</div>
 				</div>
 			</div>

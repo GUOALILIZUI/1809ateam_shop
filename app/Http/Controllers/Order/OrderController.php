@@ -29,12 +29,18 @@ class OrderController extends Controller
                     $price[]=$v->add_price;
                 }
         }
+        //总金额
         $add_price=array_sum($price);
-
+        //优惠券
+        $discounts= rand(1,100);
+        //实付金额
+        $amount=$add_price - $discounts;
         $data=[
             'order_number'=>$order_number,
             'user_id'=>$uid,
             'order_amount'=>$add_price,
+            'true_amount'=>$amount,
+            'discounts'=>$discounts,
             'order_message'=>'cc',
             'ctime'=>time()
         ];
@@ -88,6 +94,8 @@ class OrderController extends Controller
 //        $order_number=$request->input('order_number');
         $orderInfo=DB::table('shop_order')->where('order_id',$orderId)->first();
         $order_number=$orderInfo->order_number;
+        $discounts=$orderInfo->discounts;
+        $true_amount=$orderInfo->true_amount;
 
         $detailInfo=DB::table('shop_order_detail')->where(['shop_order_detail.order_number'=>$order_number,'shop_order.pay_status'=>1])
             ->join('shop_order','shop_order_detail.order_id','=','shop_order.order_id')
@@ -100,7 +108,9 @@ class OrderController extends Controller
 
         $arr=[
             'amount'=>$amount,
-            'order_id'=>$orderId
+            'order_id'=>$orderId,
+            'discounts'=>$discounts,
+            'true_amount'=>$true_amount
         ];
 
 //        $addressInfo=DB::table('shop_order_address')->where('user_id',$uid)->get();
