@@ -42,6 +42,7 @@ class WXController extends Controller
             $user_id=$arr->user_id;
 
             $response = $this->accredit();
+            print_r($response);die;
             $arr = DB::table('shop_wx_user')->where('openid',$response['openid'])->first();
             if($arr){
                 $arr = ['status'=>2,'msg'=>'该账户已被绑定'];
