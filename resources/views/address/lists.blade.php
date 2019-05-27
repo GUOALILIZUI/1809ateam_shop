@@ -21,6 +21,14 @@
 	
 	<link rel="shortcut icon" href="img/favicon.png">
 
+
+	<!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+	<!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+
 </head>
 <body>
 
@@ -28,7 +36,7 @@
 	<div class="navbar-top">
 		<!-- site brand	 -->
 		<div class="site-brand">
-			<a href="index.html"><h1>Mstore</h1></a>
+			<a href="AddressIndex"><h1>添加地址</h1></a>
 		</div>
 		<!-- end site brand	 -->
 		<div class="side-nav-panel-right">
@@ -361,32 +369,88 @@
 		</div>
 	</div>
 	<!-- end cart menu -->
-
 	
-	<!-- login -->
-	<div class="pages section">
+	<!-- cart -->
+	<div class="cart section">
 		<div class="container">
 			<div class="pages-head">
-				<h3>LOGIN</h3>
+				<h3>CART</h3>
 			</div>
-			<div class="login">
+			<div class="content">
+				@foreach($arr as $v)
+				<div class="cart-1">
+					<div class="row">
+						<div class="col s5">
+							<h5>Name</h5>
+						</div>
+						<div class="col s7">
+							<h5><a href="">{{$v->user_name}}</a></h5>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col s5">
+							<h5>Address</h5>
+						</div>
+						<div class="col s7">
+							<h5><a href="">{{$v->province}}{{$v->city}}{{$v->detailed}}</a></h5>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col s5">
+							<h5>Tel</h5>
+						</div>
+						<div class="col s7">
+							<h5>{{$v->user_tel}}</h5>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col s5">
+							<h5>Default</h5>
+						</div>
+						<div class="col s7">
+							{{--<h5>--}}
+								<div class="checkbox">
+									<label>
+										<input type="checkbox"> Check me out
+									</label>
+								</div>
+							{{--</h5>--}}
+						</div>
+					</div>
+					<hr/>
+				</div>
+				@endforeach
+			<div class="total">
 				<div class="row">
-					<form class="col s12">
-						<div class="input-field">
-							<input type="text" class="validate" name="user_name" id="user_name" placeholder="USERNAME" required>
-						</div>
-						<div class="input-field">
-							<input type="password" class="validate" user="user_pass" id="user_pass" placeholder="PASSWORD" required>
-						</div>
-						<a href="reg"><h6>还没有账号么 ?  快来创建一个吧！！！</h6></a>
-						<a href="javascript:;" class="btn button-default" id="log">LOGIN</a>
-					</form>
+					<div class="col s7">
+						<h5>Fashion Men's</h5>
+					</div>
+					<div class="col s5">
+						<h5>$21.00</h5>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col s7">
+						<h5>Fashion Men's</h5>
+					</div>
+					<div class="col s5">
+						<h5>$20.00</h5>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col s7">
+						<h6>Total</h6>
+					</div>
+					<div class="col s5">
+						<h6>$41.00</h6>
+					</div>
 				</div>
 			</div>
+			<button class="btn button-default">Process to Checkout</button>
 		</div>
 	</div>
-	<!-- end login -->
-	
+	<!-- end cart -->
+
 	<!-- loader -->
 	<div id="fakeLoader"></div>
 	<!-- end loader -->
@@ -419,62 +483,6 @@
 	<script src="js/fakeLoader.min.js"></script>
 	<script src="js/animatedModal.min.js"></script>
 	<script src="js/main.js"></script>
-
-	<script src="layui/layui.js"></script>
-	<script type="text/javascript"></script>
-	<script>
-        $(function(){
-            layui.use(['form','layer'], function(){
-                var form = layui.form();
-                var layer=layui.layer;
-                $('#log').click(function(){
-                    if($('#user_name').val()==''){
-                        layer.msg('用户名必填！');
-                    }else if($('#user_pass').val()==''){
-                        layer.msg('密码必填!');
-                    }else{
-                        var url = "login";
-                        var user_name = $('#user_name').val();
-                        var user_pass = $('#user_pass').val();
-                        $.ajax({
-                            data   : {user_name:user_name,user_pass:user_pass},
-                            url : url,
-                            type:'POST',//HTTP请求类
-                            success:function(msg){
-                                console.log(msg);
-                                if(msg.status==1){
-//                                     layer.msg(msg.msg);
-//                                     location.href='reg';
-                                    layer.open({
-                                        type:0,
-                                        content:'登录成功',
-                                        btn:['换个用户？！','马上去首页看看'],
-                                        yes:function(index,layero){
-                                            location.href="log";
-                                            return true;
-                                        },
-                                        btn2:function(){
-                                            location.href="/";
-                                            return true;
-                                        }
-                                    })
-                                }else if(msg.status==3){
-                                    layer.msg(msg.msg);
-//                                    location.href='log';
-                                }else if(msg.status==4){
-                                    layer.msg(msg.msg);
-//                                    location.href='log';
-                                }else{
-                                    layer.msg(msg.msg);
-//                                    location.href='log';
-                                }
-                            },
-                        });
-                    }
-                })
-            })
-        })
-	</script>
 
 </body>
 </html>

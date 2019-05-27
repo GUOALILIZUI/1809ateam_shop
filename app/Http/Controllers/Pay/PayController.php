@@ -29,7 +29,7 @@ class PayController extends Controller
         $this->app_id = env('ALIPAY_APPID');
         $this->gate_way = 'https://openapi.alipaydev.com/gateway.do';
         $this->notify_url = env('ALIPAY_NOTIFY_URL');
-        $this->return_url = 'http://1809a.team.com/aliReturn';
+        $this->return_url = env('ALIPAY_RETURN_URL');
         $this->rsaPrivateKeyFilePath = storage_path('app/pay/private.key');    //应用私钥
         $this->aliPubKey = storage_path('app/pay/public.key'); //支付宝公钥
     }
@@ -44,12 +44,12 @@ class PayController extends Controller
      */
     public function pay()
     {
-        $order_id=1;
+        $order_id=$_GET['order_id'];
         //验证订单状态 是否已支付 是否是有效订单
         $order_info = DB::table('shop_order')->where(['order_id'=>$order_id])->first();
 //        echo '<pre>';print_r($order_info);echo '</pre>';echo '<hr>';
         //判断订单是否已被支付
-        if($order_info->order_status>0){
+        if($order_info->pay_status>1){
             die("订单已支付，请勿重复支付");
         }
         //业务参数
@@ -145,10 +145,21 @@ class PayController extends Controller
      */
     public function notify()
     {
-        $p = json_encode($_POST);
-        $log_str = "\n>>>>>> " .date('Y-m-d H:i:s') . ' '.$p . " \n";
+        $pay = json_encode($_POST);
+        $log_str = "\n>>>>>> " .date('Y-m-d H:i:s') . ' '.$pay . " \n";
         file_put_contents('/tmp/1809a_team.log',$log_str,FILE_APPEND);
-        echo 'success';
+        $data=json_decode($pay,true);
+        if($data['trade_status']=='TRADE_SUCCESS'){
+            $where=[
+                'order_id'=>$data['out_trade_no'],
+            ];
+            DB::table('shop_order')->where($where)->update(['order_pay_status'=>2,'pay_type'=>1]);
+            DB::table('shop_order_detail')->where($where)->update(['pay_status'=>2]);
+//            DB::table('cart')->where($where)->update(['pay_status'=>2]);
+
+
+        }
+
         //TODO 验签 更新订单状态
     }
     /**

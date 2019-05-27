@@ -25,6 +25,10 @@ class VerifyCsrfToken extends Middleware
         'wish/wishDel',
         'addressDo',
         'notify',
-        'orderIndex',
+        'wxPayBack',
+        'register',
+        'login',
+        'addcart',
+        'orderDo',
     ];
 }
