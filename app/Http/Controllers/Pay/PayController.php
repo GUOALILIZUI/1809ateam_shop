@@ -155,7 +155,6 @@ class PayController extends Controller
             ];
             DB::table('shop_order')->where($where)->update(['order_pay_status'=>2,'pay_type'=>1]);
             DB::table('shop_order_detail')->where($where)->update(['pay_status'=>2]);
-//            DB::table('cart')->where($where)->update(['pay_status'=>2]);
 
 
         }
@@ -167,7 +166,7 @@ class PayController extends Controller
      */
     public function aliReturn()
     {
-        echo '<pre>';print_r($_GET);echo '</pre>';
+        echo '支付成功';
     }
 }
 ?>
