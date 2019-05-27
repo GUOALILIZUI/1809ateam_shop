@@ -34,7 +34,7 @@
             success: function(d){
                 if(d.pay_status==3){
                     alert("支付成功");
-                    location.href = "/index";
+                    location.href = "/";
                 }
             }
         });
