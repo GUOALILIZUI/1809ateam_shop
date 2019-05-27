@@ -9,13 +9,15 @@ class WXController extends Controller
 {
     public function accredit(){
         $scope = "snsapi_userinfo";
-        $url = urlEncode ("http://team.alilili.top/code");
+        $url = urlEncode ("http://team.alilili.top/accreditUser");
         $url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid='.env('WX_APPID').'&redirect_uri='.$url.'&response_type=code&scope='.$scope.'&state=STATE#wechat_redirect';
         header('Location:'.$url);
     }
     public function code(Request $request){
-        $data = $request->input();
+        $data = $this->accreditDo();
         $code = $data['code'];
+        $user_name = $data['user_name'];
+        $user_pass = $data['user_pass'];
         $url = 'https://api.weixin.qq.com/sns/oauth2/access_token?appid='.env('WX_APPID').'&secret='.env('WX_SECRET').'&code='.$code.'&grant_type=authorization_code';
         $responser = json_decode(file_get_contents($url),true);
         $accessToken = $responser['access_token'];
@@ -23,18 +25,6 @@ class WXController extends Controller
 
         $url = "https://api.weixin.qq.com/sns/userinfo?access_token=$accessToken&openid=$openid&lang=zh_CN";
         $responser = json_decode(file_get_contents($url),true);
-        return $responser;
-    }
-    public function accreditUser(){
-        return view('weixin.accreditUser');
-    }
-    public function accreditDo(Request $request){
-        header('Access-Control-Allow-Origin *;');
-        $response=$this->accredit();
-        print_r($response);die;
-        $data = $request->input();
-        $user_name = $data['user_name'];
-        $user_pass = $data['user_pass'];
 
         $arr = DB::table('shop_user')->where('user_name',$user_name)->first();
         if ($arr){
@@ -45,14 +35,14 @@ class WXController extends Controller
             $user_id=$arr->user_id;
 
 
-            $arr = DB::table('shop_wx_user')->where('openid',$response['openid'])->first();
+            $arr = DB::table('shop_wx_user')->where('openid',$responser['openid'])->first();
             if($arr){
                 $arr = ['status'=>2,'msg'=>'该账户已被绑定'];
                 return $arr;
             }else{
                 $where = [
-                    'wx_user_name'=>$response['nickname'],
-                    'openid'=>$response['openid'],
+                    'wx_user_name'=>$responser['nickname'],
+                    'openid'=>$responser['openid'],
                     'user_id'=>$user_id
                 ];
                 $data = DB::table('shop_wx_user')->insert($where);
@@ -62,6 +52,16 @@ class WXController extends Controller
                 }
             }
         }
+    }
+    public function accreditUser(){
+        return view('weixin.accreditUser');
+    }
+    public function accreditDo(Request $request){
+        $data = $request->input();
+        $code = $data['code'];
+        $user_name = $data['user_name'];
+        $user_pass = $data['user_pass'];
+       return $data;
     }
     /**
      * @return mixed
