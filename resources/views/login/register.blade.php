@@ -21,6 +21,8 @@
 	
 	<link rel="shortcut icon" href="img/favicon.png">
 
+	<script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+
 </head>
 <body>
 
@@ -379,7 +381,14 @@
 							<input type="email" placeholder="EMAIL" name="user_email" id="user_email" class="validate" required>
 						</div>
 						<div class="input-field">
+							<s class="phone"></s><input id="userMobile" name="user_tel" id="user_tel" maxlength="11"  type="number" placeholder="tel" value="" />
+						</div>
+						<div class="input-field">
 							<input type="password" placeholder="PASSWORD" name="user_pass" id="user_pass" class="validate" required>
+						</div>
+						<div class="input-field">
+							<s class="phone"></s><input id="user_code" name="user_code" style="width: 67%" maxlength="11"  type="number" placeholder="请输入验证码" value="" />
+							<button type="button" class="layui-btn layui-btn-lg layui-btn-radius layui-btn-normal" id="dateBtn1">获取验证码</button>
 						</div>
 						<div class="btn button-default" id="reg">REGISTER</div>
 					</form>
@@ -388,7 +397,6 @@
 		</div>
 	</div>
 	<!-- end register -->
-	
 
 	<!-- loader -->
 	<div id="fakeLoader"></div>
@@ -424,6 +432,7 @@
 	<script src="js/main.js"></script>
 	<script src="layui/layui.js"></script>
 	<script type="text/javascript"></script>
+	<script src="js/leftTime.min.js"></script>
 	<script>
         $(function(){
             layui.use(['form','layer'], function(){
@@ -440,9 +449,11 @@
                         var url = "register";
                         var user_name = $('#user_name').val();
                         var user_email = $('#user_email').val();
+                        var user_tel = $('#userMobile').val();
+                        var user_code = $('#user_code').val();
                         var user_pass = $('#user_pass').val();
                         $.ajax({
-                            data   : {user_name:user_name,user_email:user_email,user_pass:user_pass},
+                            data   : {user_name:user_name,user_email:user_email,user_pass:user_pass,user_tel:user_tel,user_code:user_code},
                             url : url,
                             type:'POST',//HTTP请求类
                             success:function(msg){
@@ -466,6 +477,9 @@
                                 }else if(msg.status==3){
                                     layer.msg(msg.msg);
 //                                     location.href='reg';
+								}else if(msg.status==5){
+                                    layer.msg(msg.msg);
+//                                     location.href='reg';
                                 }else if(msg.status==4){
                                     layer.msg(msg.msg);
 //                                     location.href='reg';
@@ -477,8 +491,69 @@
                         });
                     }
                 })
+                $('#userMobile').blur(function(){
+                    reg=/^1(3[0-9]|4[57]|5[0-35-9]|8[0-9]|7[06-8])\d{8}$/;//验证手机正则(输入前7位至11位)
+                    var that = $(this);
+
+                    if( that.val()==""|| that.val()=="请输入您的手机号")
+                    {
+                        layer.msg('请输入您的手机号！');
+                    }
+                    else if(that.val().length<11)
+                    {
+                        layer.msg('您输入的手机号长度有误！');
+                    }
+                    else if(!reg.test($("#userMobile").val()))
+                    {
+                        layer.msg('您输入的手机号不存在!');
+                    }
+                    else if(that.val().length == 11){
+                        // ajax请求后台数据
+                    }
+                })
+                $('#user_pass').blur(function(){
+                    reg=/^[0-9a-zA-Z]{6,16}$/;
+                    var that = $(this);
+                    if( that.val()==""|| that.val()=="6-16位数字或字母组成")
+                    {
+                        layer.msg('请设置您的密码！');
+                    }else if(!reg.test($(".pwd").val())){
+                        layer.msg('请输入6-16位数字或字母组成的密码!');
+                    }
+                })
             })
         })
+
+        $(function(){
+            //60秒倒计时
+            $("#dateBtn1").on("click",function(){
+                var _this=$(this);
+                if(!$(this).hasClass("on")){
+                    var data = {};
+                    var url = "getcode";
+                    tel = $("#userMobile").val();
+                    data.tel = tel;
+                    $.ajax({
+                        type : "post",
+                        data : data,
+                        url : url,
+                        dataType : "json",
+                        success:function(msg){
+
+                        }
+                    })
+                    $.leftTime(60,function(d){
+                        if(d.status){
+                            _this.addClass("on");
+                            _this.html((d.s=="00"?"60":d.s)+"秒后重新获取");
+                        }else{
+                            _this.removeClass("on");
+                            _this.html("获取验证码");
+                        }
+                    });
+                }
+            });
+        });
 	</script>
 </body>
 </html>

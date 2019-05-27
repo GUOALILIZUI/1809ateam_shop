@@ -24,6 +24,7 @@ Route::get('/', 'Index\IndexController@index');  //首页展示
 Route::get('reg', 'Login\RegController@reg');  //注册展示
 
 Route::post('register', 'Login\RegController@register');  //注册执行
+Route::post('getcode', 'Login\RegController@getcode');  //短信
 
 Route::get('log', 'Login\LogController@log');  //登录展示
 

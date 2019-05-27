@@ -21,9 +21,12 @@ class ListsController extends Controller
 
         }else{
 
-            $arr = ['status'=>3,'msg'=>'请先登录'];
-            $arr = json_encode($arr,JSON_UNESCAPED_UNICODE);
-            return $arr;
+//            $arr = ['status'=>3,'msg'=>'请先登录'];
+//            $arr = json_encode($arr,JSON_UNESCAPED_UNICODE);
+//            return $arr;
+            header('Refresh:3;url=log');
+            die("请先登录,自动跳转至登录页面");
+
         }
 
     }

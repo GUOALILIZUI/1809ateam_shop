@@ -228,4 +228,10 @@ return [
 
     ],
 
+    "send" => [
+        "username" => "mingjin",
+        "pwd" => "1qaz2wsx",
+        "url" => "http://sms.106jiekou.com/utf8/sms.aspx",
+    ],
+
 ];
