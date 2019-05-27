@@ -89,7 +89,7 @@ class ProductController extends Controller
      */
     public function wish(Request $request){
         $goods_id = $request->input('goods_id');
-        $user_id = session('u_id');
+        $user_id = $request->cookie('user_id');
 
         if(empty($user_id)){
             $response = [
@@ -135,8 +135,8 @@ class ProductController extends Controller
     /**
      * 收藏展示
      */
-    public function wishList(){
-        $user_id = session('user_id');
+    public function wishList(Request $request){
+        $user_id = $request->cookie('user_id');
 
         if(empty($user_id)){
             $response = [
@@ -154,7 +154,7 @@ class ProductController extends Controller
      */
     public function wishDel(Request $request){
         $goods_id = $request->input('goods_id');
-        $user_id = session('user_id');
+        $user_id = $request->cookie('user_id');
 
         $where =[
             'user_id'=>$user_id,
