@@ -56,7 +56,7 @@ class LogController extends Controller
         $responser = json_decode(file_get_contents($url),true);
         $openid = $responser['openid'];
         $accessToken = $responser['access_token'];
-        $data = DB::table('shop_user')->where('openid',$openid)->first();
+        $data = DB::table('shop_wx_user')->where('openid',$openid)->first();
 
         if($data){
             $url = "https://api.weixin.qq.com/sns/userinfo?access_token=$accessToken&openid=$openid&lang=zh_CN";
