@@ -574,15 +574,18 @@
                     alert('请选择');
                     return false;
                 }
-                $.post(
-                    'orderDo',
-                    {goods_id:goods_id},
-                    function(msg){
-                        if(msg.erron == 0 ){
-                            console.log('orderIndex?order_id='+msg.orderId);
-                        }
-                    },'json'
-                )
+                $.ajax({
+                    method: "POST",
+                    url: 'orderDo',
+                    dataType:'json',
+                    data: { goods_id: goods_id},
+                    success: function(data){
+                        location.href = 'orderIndex?order_id='+data.orderId;
+                    },
+                    error:function(e){
+                        console.log(e);
+                    }
+                });
             })
             $(document).on('click','.zzz',function(){
                 var ss = 0;
