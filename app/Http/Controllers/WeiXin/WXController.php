@@ -19,9 +19,7 @@ class WXController extends Controller
         $code = $data['code'];
         $url = 'https://api.weixin.qq.com/sns/oauth2/access_token?appid='.env('WX_APPID').'&secret='.env('WX_SECRET').'&code='.$code.'&grant_type=authorization_code';
         $responser = json_decode(file_get_contents($url),true);
-
         $this->response = $responser;
-        print_r($this->response);die;
         header('Refresh:1;url="http://team.alilili.top/accreditUser"');
     }
     public function accreditUser(){
