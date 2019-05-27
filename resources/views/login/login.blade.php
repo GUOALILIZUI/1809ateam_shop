@@ -479,7 +479,7 @@
                 })
 
                 $('#wx').click(function(){
-                    location.href='accredit';
+                    location.href='wxLog';
 				})
             })
         })
