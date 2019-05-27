@@ -21,6 +21,7 @@ class WXController extends Controller
         $responser = json_decode(file_get_contents($url),true);
 
         $this->response = $responser;
+        print_r($this->response);die;
         header('Refresh:1;url="http://team.alilili.top/accreditUser"');
     }
     public function accreditUser(){
