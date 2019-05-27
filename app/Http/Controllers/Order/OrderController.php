@@ -13,7 +13,7 @@ class OrderController extends Controller
     //订单入库
     public function orderDo(Request $request)
     {
-        $goods_id2=$_GET['goods_id'];
+        $goods_id2=$request->input('goods_id');
         $goods_id=rtrim($goods_id2,',');
 //        $goods_id='1,2,3';
 
