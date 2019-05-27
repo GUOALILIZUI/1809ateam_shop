@@ -23,44 +23,65 @@ class WXController extends Controller
 
         $url = "https://api.weixin.qq.com/sns/userinfo?access_token=$accessToken&openid=$openid&lang=zh_CN";
         $responser = json_decode(file_get_contents($url),true);
-        return $responser;
-    }
-    public function accreditUser(){
-        return view('weixin.accreditUser');
-    }
-    public function accreditDo(Request $request){
-        $response=$this->accredit();
-        $data = $request->input();
-        $user_name = $data['user_name'];
-        $user_pass = $data['user_pass'];
-
-        $arr = DB::table('shop_user')->where('user_name',$user_name)->first();
-        if ($arr){
-            if ($user_pass != $arr->user_pass){
-                $arr = ['status'=>1,'msg'=>'账号或密码错误'];
+        $data = DB::table('shop_user')->where('openid',$openid)->first();
+        if($data){
+            $arr = ['status'=>2,'msg'=>'该账户已被绑定'];
+            return $arr;
+        }else{
+            $where = [
+                'user_name'=>$responser['nickname'],
+                'openid'=>$responser['openid'],
+            ];
+            $data = DB::table('shop_user')->insert($where);
+            $data = DB::table('shop_user')->where('openid',$openid)->first();
+            $where = [
+                'wx_user_name'=>$responser['nickname'],
+                'openid'=>$responser['openid'],
+                'user_id'=>$data->user_id
+            ];
+            $data = DB::table('shop_wx_user')->insert($where);
+            if($data){
+                $arr = ['status'=>0,'msg'=>'绑定成功'];
                 return $arr;
-            }
-            $user_id=$arr->user_id;
-
-
-            $arr = DB::table('shop_wx_user')->where('openid',$response['openid'])->first();
-            if($arr){
-                $arr = ['status'=>2,'msg'=>'该账户已被绑定'];
-                return $arr;
-            }else{
-                $where = [
-                    'wx_user_name'=>$response['nickname'],
-                    'openid'=>$response['openid'],
-                    'user_id'=>$user_id
-                ];
-                $data = DB::table('shop_wx_user')->insert($where);
-                if($data){
-                    $arr = ['status'=>0,'msg'=>'绑定成功'];
-                    return $arr;
-                }
             }
         }
     }
+//    public function accreditUser(){
+//        return view('weixin.accreditUser');
+//    }
+//    public function accreditDo(Request $request){
+//        $response=$this->accredit();
+//        $data = $request->input();
+//        $user_name = $data['user_name'];
+//        $user_pass = $data['user_pass'];
+//
+//        $arr = DB::table('shop_user')->where('user_name',$user_name)->first();
+//        if ($arr){
+//            if ($user_pass != $arr->user_pass){
+//                $arr = ['status'=>1,'msg'=>'账号或密码错误'];
+//                return $arr;
+//            }
+//            $user_id=$arr->user_id;
+//
+//
+//            $arr = DB::table('shop_wx_user')->where('openid',$response['openid'])->first();
+//            if($arr){
+//                $arr = ['status'=>2,'msg'=>'该账户已被绑定'];
+//                return $arr;
+//            }else{
+//                $where = [
+//                    'wx_user_name'=>$response['nickname'],
+//                    'openid'=>$response['openid'],
+//                    'user_id'=>$user_id
+//                ];
+//                $data = DB::table('shop_wx_user')->insert($where);
+//                if($data){
+//                    $arr = ['status'=>0,'msg'=>'绑定成功'];
+//                    return $arr;
+//                }
+//            }
+//        }
+//    }
     /**
      * @return mixed
      * 获取微信accessToken
