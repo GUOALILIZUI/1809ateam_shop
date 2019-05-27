@@ -45,7 +45,7 @@ class LogController extends Controller
 
     public function wxLog(){
         $scope = "snsapi_userinfo";
-        $url = urlEncode ("http://team.alilili.top/code");
+        $url = urlEncode ("http://team.alilili.top/wxCode");
         $url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid='.env('WX_APPID').'&redirect_uri='.$url.'&response_type=code&scope='.$scope.'&state=STATE#wechat_redirect';
         header('Location:'.$url);
     }

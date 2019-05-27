@@ -23,7 +23,7 @@ class WXController extends Controller
 
         if(empty($user_id)){
             $response = [
-                'msg'=>'登陆后才能绑定微信哦，亲！',
+                'msg'=>'登陆后绑定微信,才能第三方登录！',
                 'status'=>40004
             ];
             echo json_encode($response,JSON_UNESCAPED_UNICODE);
