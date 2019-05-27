@@ -66,7 +66,7 @@ class OrderController extends Controller
                 'ctime'=>time()
             ];
             $orderInfo=DB::table('shop_order_detail')->where('user_id',$uid)->insertGetId($info);
-            DB::table('shop_cart')->where('goods_id',$v->goods_id)->update(['status'=>2]);
+            DB::table('shop_cart')->where('goods_id',$v->goods_id)->update(['utime'=>time(),'status'=>2]);
         }
         if($orderInfo){
             $response=[
