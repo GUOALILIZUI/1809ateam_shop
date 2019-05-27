@@ -250,23 +250,6 @@
     </div>
 </div>
 
-<<<<<<< HEAD
-	<!-- side nav right-->
-	<div class="side-nav-panel-right">
-		<ul id="slide-out-right" class="side-nav side-nav-panel collapsible">
-			<li class="profil">
-				<img src="img/profile.jpg" alt="">
-				<h2>John Doe</h2>
-			</li>
-			<li><a href="setting.html"><i class="fa fa-cog"></i>Settings</a></li>
-			<li><a href="lists"><i class="fa fa-user"></i>About Us</a></li>
-			<li><a href="contact.html"><i class="fa fa-envelope-o"></i>Contact Us</a></li>
-			<li><a href="log"><i class="fa fa-sign-in"></i>Login</a></li>
-			<li><a href="reg"><i class="fa fa-user-plus"></i>Register</a></li>
-		</ul>
-	</div>
-	<!-- end side nav right-->
-=======
 <!-- cart menu -->
 <div class="menus" id="animatedModal">
     <div class="close-animatedModal close-icon">
@@ -302,7 +285,6 @@
                                     <h5>${{$v->add_price}} </h5>
                                 </div>
                             </div>
->>>>>>> cart2
 
                             <div class="row">
                                 <div class="col s5">
@@ -540,13 +522,15 @@
                     alert('请选择');
                     return false;
                 }
-                // $.post(
-                //     'orderIndex',
-                //     {goods_id:goods_id},
-                //     function(msg){
-                //
-                //     }
-                // )
+                $.post(
+                    'orderDo',
+                    {goods_id:goods_id},
+                    function(msg){
+                            if(msg.erron == 0 ){
+                                location.href = 'orderindex?orderId='+msg.orderId;
+                            }
+                    }
+                )
             })
 
         });
