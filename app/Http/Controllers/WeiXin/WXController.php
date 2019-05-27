@@ -21,7 +21,6 @@ class WXController extends Controller
         $responser = json_decode(file_get_contents($url),true);
 
         $this->response = $responser;
-        print_r($this->response);die;
         header('Refresh:1;url="http://team.alilili.top/accreditUser"');
     }
     public function accreditUser(){
@@ -40,16 +39,15 @@ class WXController extends Controller
             }
             $user_id=$arr->user_id;
 
-            $response = $this->response;
-            echo "<pre>";print_r($response);echo "</pre>";die;
-            $openid = $response['openid'];
+
+            $openid = $this->response['openid'];
             $arr = DB::table('shop_wx_user')->where('openid',$openid)->first();
             if($arr){
                 $arr = ['status'=>2,'msg'=>'该账户已被绑定'];
                 return $arr;
             }else{
                 $where = [
-                    'wx_user_name'=>$response['nickname'],
+                    'wx_user_name'=>$this->response['nickname'],
                     'openid'=>$openid,
                     'user_id'=>$user_id
                 ];
