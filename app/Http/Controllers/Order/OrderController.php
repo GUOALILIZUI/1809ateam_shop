@@ -18,7 +18,7 @@ class OrderController extends Controller
 //        $goods_id='1,2,3';
 
         $cc=explode(',',$goods_id);
-        $uid=session('user_id');
+        $uid=$request->cookie('user_id');
 //                $uid=1;
 //        $goods_id=$request->input();
         $goodsInfo = DB::table('shop_cart')->where('user_id',$uid)->whereIn('goods_id',$cc)->get();
