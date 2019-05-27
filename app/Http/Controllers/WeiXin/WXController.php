@@ -26,7 +26,7 @@ class WXController extends Controller
         $data = DB::table('shop_user')->where('openid',$openid)->first();
         if($data){
             $arr = ['status'=>2,'msg'=>'该账户已被绑定'];
-            return $arr;
+            echo json_encode($arr,JSON_UNESCAPED_UNICODE);
             header("Refresh:2;url='http://team.alilili.top/'");
         }else{
             $where = [
@@ -43,7 +43,7 @@ class WXController extends Controller
             $data = DB::table('shop_wx_user')->insert($where);
             if($data){
                 $arr = ['status'=>0,'msg'=>'绑定成功'];
-                return $arr;
+                echo json_encode($arr,JSON_UNESCAPED_UNICODE);
                 header("Refresh:2;url='http://team.alilili.top/'");
             }
         }
