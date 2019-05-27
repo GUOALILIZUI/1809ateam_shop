@@ -527,7 +527,7 @@
                     {goods_id:goods_id},
                     function(msg){
                             if(msg.erron == 0 ){
-                                location.href = 'orderIndex?order_id='+msg.orderId;
+                                console.log('orderIndex?order_id='+msg.orderId);
                             }
                     }
                 )
