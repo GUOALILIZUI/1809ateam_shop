@@ -29,7 +29,7 @@ class WXController extends Controller
         return view('weixin.accreditUser');
     }
     public function accreditDo(Request $request){
-        header('add_header Access-Control-Allow-Origin *;');
+        header('Access-Control-Allow-Origin *;');
         $response=$this->accredit();
         print_r($response);die;
         $data = $request->input();
