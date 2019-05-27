@@ -621,15 +621,17 @@
                 //     },'json'
                 // )
                 $.ajax({
-                      method: "POST",
-                      url: 'orderDo',
-                      dataType:'json',
-                      data: { goods_id: goods_id}
-                  }).done(function( msg ) {
-                     location.href = 'orderIndex?order_id='+msg.orderId;
-                    });
-            })
-
+                    method: "POST",
+                    url: 'orderDo',
+                    dataType:'json',
+                    data: { goods_id: goods_id},
+                    success: function(data){
+                        location.href = 'orderIndex?order_id='+msg.orderId;
+                    },
+                    error:function(e){
+                        console.log(e);
+                    }
+                });
         });
     })
 </script>
