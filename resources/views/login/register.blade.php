@@ -490,27 +490,7 @@
                             },
                         });
                     }
-                })
-                $('#userMobile').blur(function(){
-                    reg=/^1(3[0-9]|4[57]|5[0-35-9]|8[0-9]|7[06-8])\d{8}$/;//验证手机正则(输入前7位至11位)
-                    var that = $(this);
-
-                    if( that.val()==""|| that.val()=="请输入您的手机号")
-                    {
-                        layer.msg('请输入您的手机号！');
-                    }
-                    else if(that.val().length<11)
-                    {
-                        layer.msg('您输入的手机号长度有误！');
-                    }
-                    else if(!reg.test($("#userMobile").val()))
-                    {
-                        layer.msg('您输入的手机号不存在!');
-                    }
-                    else if(that.val().length == 11){
-                        // ajax请求后台数据
-                    }
-                })
+                });
                 $('#user_pass').blur(function(){
                     reg=/^[0-9a-zA-Z]{6,16}$/;
                     var that = $(this);
