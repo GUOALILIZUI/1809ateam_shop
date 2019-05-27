@@ -611,15 +611,6 @@
                     alert('请选择');
                     return false;
                 }
-                // $.ajax(
-                //     'orderDo',
-                //     {goods_id:goods_id},
-                //     function(msg){
-                //         if(msg.errno == 0 ){
-                //            location.href = 'orderIndex?order_id='+msg.orderId;
-                //         }
-                //     },'json'
-                // )
                 $.ajax({
                     method: "POST",
                     url: 'orderDo',
