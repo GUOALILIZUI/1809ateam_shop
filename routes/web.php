@@ -30,6 +30,10 @@ Route::get('log', 'Login\LogController@log');  //登录展示
 
 Route::post('login', 'Login\LogController@login');  //登录执行
 
+Route::get('wxLog','Login\LogController@wxLog');  //微信登录
+
+Route::get('wxCode','Login\LogController@wxCode');
+
 //商品
 
 Route::get('lists', 'Address\ListsController@lists');  //地址展示

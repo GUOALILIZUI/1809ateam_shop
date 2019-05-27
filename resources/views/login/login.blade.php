@@ -383,6 +383,11 @@
 					</form>
 				</div>
 			</div>
+			<div align="center">
+
+				<img src="/img/f57373bf22ddc5907b8d6a9444c01171.png" alt="" id="wx">
+				<h6>第三方登录</h6>
+			</div>
 		</div>
 	</div>
 	<!-- end login -->
@@ -472,6 +477,10 @@
                         });
                     }
                 })
+
+                $('#wx').click(function(){
+                    location.href='accredit';
+				})
             })
         })
 	</script>
