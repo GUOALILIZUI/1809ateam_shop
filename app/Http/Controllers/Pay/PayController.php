@@ -148,7 +148,17 @@ class PayController extends Controller
         $pay = json_encode($_POST);
         $log_str = "\n>>>>>> " .date('Y-m-d H:i:s') . ' '.$pay . " \n";
         file_put_contents('/tmp/1809a_team.log',$log_str,FILE_APPEND);
-       $data=json_decode($pay,true);
+        $data=json_decode($pay,true);
+        if($data['trade_status']=='TRADE_SUCCESS'){
+            $where=[
+                'order_id'=>$data['out_trade_no'],
+            ];
+            DB::table('shop_order')->where($where)->update(['order_pay_status'=>2,'pay_type'=>1]);
+            DB::table('shop_order_detail')->where($where)->update(['pay_status'=>2]);
+//            DB::table('cart')->where($where)->update(['pay_status'=>2]);
+
+
+        }
 
         //TODO 验签 更新订单状态
     }
