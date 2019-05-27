@@ -28,7 +28,9 @@ class CartController extends Controller
                    $num += $v->add_price * $v->buy_number;
                }
                return view('cart/cart', ['res' => $res, 'num' => $num]);
-       }
+       }else{
+               header('refresh:3;url="log"');
+           }
     }
     //购物车列表删除操作
     public function delCart(Request $request)
@@ -57,7 +59,9 @@ class CartController extends Controller
                 $json=json_encode($data);
             }
             echo $json;
-     }
+     }else{
+            header('refresh:3;url="log"');
+        }
     }
     public function cartnum(Request $request)
     {
@@ -93,6 +97,8 @@ class CartController extends Controller
         }
         $json=json_encode($data);
         return $json;
+        }else{
+            header('refresh:3;url="log"');
         }
     }
 
@@ -160,6 +166,8 @@ class CartController extends Controller
                     return $json;
                 }
             }
+        }else{
+            header('refresh:3;url="log"');
         }
         }
     }
