@@ -76,7 +76,7 @@ class LogController extends Controller
                 'msg'=>'账号未能绑定微信，去个人中心绑定！'
             ];
             echo json_encode($responser,JSON_UNESCAPED_UNICODE);
-            header("Refresh:2;url='http://team.alilili.top/log'");
+            header("Refresh:2;url='http://team.alilili.top/accreditUser'");
         }
     }
 }

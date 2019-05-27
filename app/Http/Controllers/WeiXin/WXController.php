@@ -7,7 +7,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 class WXController extends Controller
 {
-    public $openidInfo = [];
     public function accredit(){
         $scope = "snsapi_userinfo";
         $url = urlEncode ("http://team.alilili.top/code");
@@ -19,13 +18,14 @@ class WXController extends Controller
         $code = $data['code'];
         $url = 'https://api.weixin.qq.com/sns/oauth2/access_token?appid='.env('WX_APPID').'&secret='.env('WX_SECRET').'&code='.$code.'&grant_type=authorization_code';
         $responser = json_decode(file_get_contents($url),true);
-        $this->openidInfo = $responser;
-        return $this->openidInfo;
-        header('Refresh:1;url="http://team.alilili.top/accreditUser"');
+        $accessToken = $responser['access_token'];
+        $openid = $responser['openid'];
+
+        $url = "https://api.weixin.qq.com/sns/userinfo?access_token=$accessToken&openid=$openid&lang=zh_CN";
+        $responser = json_decode(file_get_contents($url),true);
+        return $responser;
     }
     public function accreditUser(){
-        $a=$this->accredit();
-        var_dump($a);die;
         return view('weixin.accreditUser');
     }
     public function accreditDo(Request $request){
@@ -41,15 +41,15 @@ class WXController extends Controller
             }
             $user_id=$arr->user_id;
 
-            print_r($this->openidInfo);die;
-            $arr = DB::table('shop_wx_user')->where('openid',$this->response['openid'])->first();
+            $response = $this->accredit();
+            $arr = DB::table('shop_wx_user')->where('openid',$response['openid'])->first();
             if($arr){
                 $arr = ['status'=>2,'msg'=>'该账户已被绑定'];
                 return $arr;
             }else{
                 $where = [
-                    'wx_user_name'=>$this->response['nickname'],
-                    'openid'=>$this->response['openid'],
+                    'wx_user_name'=>$response['nickname'],
+                    'openid'=>$response['openid'],
                     'user_id'=>$user_id
                 ];
                 $data = DB::table('shop_wx_user')->insert($where);
